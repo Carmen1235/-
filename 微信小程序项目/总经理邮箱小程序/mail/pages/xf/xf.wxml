@@ -1,0 +1,58 @@
+<view class="xf">
+  <view class="xf_title">宁波万汇信箱</view>
+  <view class="xf_header">
+    <view class="page__title">
+      <image src="../../images/logo2.png" class="logo" />
+    </view>
+    <view>
+      <text class="xf_header_txt" space="emsp">  欢迎进入宁波万汇总经理信箱。您所反馈的信息，公司会逐一落实。请您在反馈时，将姓名、部门、手机号、意见/建议描述清楚，以便我们落实纠正。</text>
+    </view>
+    <view>
+      <text class="xf_header_txt" space="emsp">  我们会及时反馈您所提报的问题，对于您的个人信息公司将予以保密。</text>
+    </view>
+
+  </view>
+
+  <view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+      <view class="xf_form_item">
+        <view >选择分类</view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker" style=" border: 1px solid #baf0c7;">
+            当前选择：{{array[index]}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="xf_form_item">
+        <label>姓名：</label>
+        <input id="username" placeholder="请输入姓名" name="userName" />
+      </view>
+      <view class="xf_form_item" style='display:none'>
+        <label>微信昵称：</label>
+        <input placeholder="请微信昵称" name="nickName" value='{{userInfo.nickName}}' />
+      </view>
+      <view class="xf_form_item" style="display:none">
+        <label>选择分类：</label>
+        <input placeholder="请选择分类" name="sort" value='{{sort}}' />
+      </view>
+      <view class="xf_form_item">
+        <label>部门：</label>
+        <input placeholder="请输入部门" name="department" />
+      </view>
+      <view class="xf_form_item">
+        <label>手机号：</label>
+        <input type="number" placeholder="请输入联系方式" name="telPhone" />
+      </view>
+      <view class="xf_form_item">
+        <label>意见/建议：</label>
+        <textarea placeholder="请输入您的反馈意见" bindinput="bindTxt" style='width: 99%' name="question" maxlength="400"/> {{txtLength}}/400
+      </view>
+      <view class="xf_form_item">
+        <button formType="submit" class='weui-btn' type="primary" disabled="{{disabled}}">提交</button>
+        <button formType="reset">重置</button>
+      </view>
+    </form>
+  </view>
+</view>

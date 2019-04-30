@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/header::header}">
+</head>
+<body>
+<!--<body class="layui-layout-body"> 使用后五滚动条-->
+<div class="layui-layout layui-layout-admin">
+    <!--Top顶部 使用nav.Html统一管理-->
+    <div th:replace="~{fragment/nav::nav}"></div>
+
+    <!--Body部分-->
+    <div class="layui-layout-body">
+
+        <!--查询条件-->
+        <div class="layui-row">
+            <blockquote class="layui-elem-quote" style="color:#01AAED;font-weight: bold;font-size: 20px">加班申请报表
+            </blockquote>
+            <fieldset class="layui-elem-field" style="height: 30%">
+                <legend>报表查询</legend>
+                <div class="layui-field-box">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">所属公司</label>
+                                <div class="layui-input-inline">
+                                    <select xm-select="corporation" xm-select-height="36px" xm-select-radio>
+                                        <option value=""></option>
+                                        <option value="XX">万汇休闲</option>
+                                        <option value="CP">万汇窗篷</option>
+                                        <option value="BS">半山伴水</option>
+                                        <option value="FX">飞想拓展</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">所属部门</label>
+                                <div class="layui-input-inline">
+                                    <select xm-select="department" xm-select-search xm-select-height="36px"
+                                            xm-select-max="1">
+                                        <option value=""></option>
+                                        <option value="CP10027">CP10027人力资源</option>
+                                        <option value="XX10105">XX10105TG线</option>
+                                        <option value="XX10122">XX10122防一班</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">员工状态</label>
+                                <div class="layui-input-inline">
+                                    <select xm-select="employeeState" xm-select-search xm-select-height="36px">
+                                        <option value=""></option>
+                                        <option value="1001" selected>试用员工</option>
+                                        <option value="2001" selected>正式员工</option>
+                                        <option value="4001" selected>实习员工</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--设置导出附件字段-->
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">加班类型</label>
+                                <div class="layui-input-inline">
+                                    <select  lay-verify="required" id="overTimeType">
+                                        <option value="平日加班">平日加班</option>
+                                        <option value="假日加班">假日加班</option>
+                                        <option value="节日加班">节日加班</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">开始日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="startDate">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">开始时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="startTime">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">结束日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="endDate">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">结束时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="endTime">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">扣用餐时间</label>
+                                <div class="layui-input-inline">
+                                    <select  lay-verify="required" id="isDeductMealTime">
+                                        <option value="是">是</option>
+                                        <option value="否">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">计划调休</label>
+                                <div class="layui-input-inline">
+                                    <select  lay-verify="required" id="isPlanDayOff">
+                                        <option value="是">是</option>
+                                        <option value="否">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label"></label>
+                                <div class="layui-input-inline">
+                                    <a class="layui-btn layui-btn-warm"><i
+                                            class="layui-icon layui-icon-search" onclick="search()"><cite>查询</cite></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <!--导出-->
+        <div class="layui-row">
+            <fieldset class="layui-elem-field" style="height: 30%">
+                <legend>报表导出</legend>
+                <div class="layui-field-box">
+                    <form class="layui-form">
+                        <div class="layui-form-item" style="font-weight: bold;color: #FF5722">
+                            导出报表前，请先进行查询操作！
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                                <a id="exportExcel" class="layui-btn layui-btn-normal" href="#" target="_blank"><i
+                                        class="far fa-file-excel"><cite>导出Excel</cite></i></a>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <!--显示列表-->
+        <div class="layui-row">
+            <table class="layui-table" lay-even
+                   lay-data="{height:500, url:'/ot/page', page:true, id:'employeeTable'}"
+                   lay-filter="test">
+                <thead>
+                <tr>
+                    <th lay-data="{field:'', width:80}">序号</th>
+                    <th lay-data="{field:'code', width:80, sort: true}">工号</th>
+                    <th lay-data="{field:'name'}">姓名</th>
+                    <th lay-data="{field:'type'}">加班类型</th>
+                    <th lay-data="{field:'sday'}">开始日期</th>
+                    <th lay-data="{field:'stime'}">开始时间</th>
+                    <th lay-data="{field:'eday'}">结束日期</th>
+                    <th lay-data="{field:'etime'}">结束时间</th>
+                    <th lay-data="{field:'isMeals'}">计划调休</th>
+                    <th lay-data="{field:'isPlan'}">扣除用餐时间</th>
+                    <th lay-data="{field:''}">备注</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/footer::footer}">...</div>
+<script>
+    var table = layui.table;
+    var formSelects = layui.formSelects;
+    var date = layui.laydate;
+    //当前时间
+    var nowTime = new Date();
+    //提醒多选框，允许选择2个部门
+    formSelects.maxTips('department', function (id, vals, val, max) {
+        layer.msg("最大选择" + max + "个部门，选超了...");
+    });
+    //预加载department
+    formSelects.data('department', 'server', {
+        url: "/department/load",
+        keyword: formSelects.value('corporation', 'valStr')
+    });
+    //选择公司触发加载department
+    formSelects.on('corporation', function (id, vals, val, isAdd, isDisabled) {
+        console.log(formSelects.value('corporation', 'valStr'))
+        formSelects.data('department', 'server', {
+            url: "/department/load",
+            keyword: formSelects.value('corporation', 'valStr')
+        });
+    }, true);
+    // 查询
+    var search = function () {
+        var corporation = formSelects.value('corporation', 'valStr');
+        var department = formSelects.value('department', 'valStr');
+        var employeeState = formSelects.value('employeeState', 'valStr');
+        // 附加条件
+        var overTimeType = $('#overTimeType').val();
+        var vestingDate = $('#vestingDate').val();
+        var startDate = $('#startDate').val();
+        var startTime = $('#startTime').val();
+        var endDate = $('#endDate').val();
+        var endTime = $('#endTime').val();
+        var isDeductMealTime = $('#isDeductMealTime').val();
+        var isPlanDayOff = $('#isPlanDayOff').val();
+
+        if (corporation == "") {
+            layer.msg("公司未选择！");
+            return
+        }
+        if (department == "") {
+            layer.msg("部门未选择！");
+            return
+        }
+        layer.msg("进行查询中...");
+        console.info(corporation + " " + employeeState + " " + department);
+        // 查询后重载数据列表
+        table.reload('employeeTable', {
+            url: '/ot/page'
+            , where: {
+                "corporationCode": corporation, "departmentId": department, "type": overTimeType
+                , "vDay": vestingDate
+                , "sDay": startDate, "sTime": startTime
+                , "eDay": endDate, "eTime": endTime
+                , "isMeals": isDeductMealTime, "isPlan": isPlanDayOff
+            } //设定异步数据接口的额外参数
+        });
+        var addHref = "?corporationCode=" + corporation + "&departmentId=" + department + "&type=" + overTimeType
+            + "&vDay=" + vestingDate
+            + "&sDay=" + startDate + "&sTime=" + startTime
+            + "&eDay=" + endDate + "&eTime=" + endTime
+            + "&isMeals=" + isDeductMealTime + "&isPlan=" + isPlanDayOff;
+        var exportHref = "/ot/export" + addHref;
+        $('#exportExcel').attr("href", exportHref);
+    }
+    //渲染Date组件
+    date.render({
+        elem: "#vestingDate"
+        , format: 'yyyy/MM/dd'
+        ,value:nowTime
+    });
+    date.render({
+        elem: "#startDate"
+        , format: 'yyyy/MM/dd'
+        ,value:nowTime
+    });
+    date.render({
+        elem: "#startTime"
+        , type: 'time'
+        , format: 'HH:mm'
+        ,value:'00:00'
+    });
+    date.render({
+        elem: "#endDate"
+        , format: 'yyyy/MM/dd'
+        ,value:nowTime
+    });
+    date.render({
+        elem: "#endTime"
+        , type: 'time'
+        , format: 'HH:mm'
+        ,value:'00:00'
+    });
+</script>
+</body>
+</html>

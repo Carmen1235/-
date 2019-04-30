@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.BrandZrMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.BrandZr">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <id column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="zrslr" jdbcType="DATE" property="zrslr"/>
+        <result column="srr" jdbcType="VARCHAR" property="srr"/>
+        <result column="dljg" jdbcType="VARCHAR" property="dljg"/>
+        <result column="zryy" jdbcType="VARCHAR" property="zryy"/>
+        <result column="zrwcr" jdbcType="DATE" property="zrwcr"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, pid, zrslr, srr, dljg, zryy, zrwcr
+  </sql>
+    <select id="selectByExample" parameterType="com.wqy.entity.BrandZrExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from brand_zr
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="com.wqy.entity.BrandZrKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from brand_zr
+        where id = #{id,jdbcType=VARCHAR}
+        and pid = #{pid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.wqy.entity.BrandZrKey">
+    delete from brand_zr
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.BrandZrExample">
+        delete from brand_zr
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.BrandZr">
+    insert into brand_zr (id, pid, zrslr, 
+      srr, dljg, zryy, zrwcr
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{zrslr,jdbcType=DATE}, 
+      #{srr,jdbcType=VARCHAR}, #{dljg,jdbcType=VARCHAR}, #{zryy,jdbcType=VARCHAR}, #{zrwcr,jdbcType=DATE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.BrandZr">
+        insert into brand_zr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="zrslr != null">
+                zrslr,
+            </if>
+            <if test="srr != null">
+                srr,
+            </if>
+            <if test="dljg != null">
+                dljg,
+            </if>
+            <if test="zryy != null">
+                zryy,
+            </if>
+            <if test="zrwcr != null">
+                zrwcr,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="zrslr != null">
+                #{zrslr,jdbcType=DATE},
+            </if>
+            <if test="srr != null">
+                #{srr,jdbcType=VARCHAR},
+            </if>
+            <if test="dljg != null">
+                #{dljg,jdbcType=VARCHAR},
+            </if>
+            <if test="zryy != null">
+                #{zryy,jdbcType=VARCHAR},
+            </if>
+            <if test="zrwcr != null">
+                #{zrwcr,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.BrandZrExample" resultType="java.lang.Long">
+        select count(*) from brand_zr
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update brand_zr
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zrslr != null">
+                zrslr = #{record.zrslr,jdbcType=DATE},
+            </if>
+            <if test="record.srr != null">
+                srr = #{record.srr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dljg != null">
+                dljg = #{record.dljg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zryy != null">
+                zryy = #{record.zryy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zrwcr != null">
+                zrwcr = #{record.zrwcr,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update brand_zr
+        set id = #{record.id,jdbcType=VARCHAR},
+        pid = #{record.pid,jdbcType=VARCHAR},
+        zrslr = #{record.zrslr,jdbcType=DATE},
+        srr = #{record.srr,jdbcType=VARCHAR},
+        dljg = #{record.dljg,jdbcType=VARCHAR},
+        zryy = #{record.zryy,jdbcType=VARCHAR},
+        zrwcr = #{record.zrwcr,jdbcType=DATE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.BrandZr">
+        update brand_zr
+        <set>
+            <if test="zrslr != null">
+                zrslr = #{zrslr,jdbcType=DATE},
+            </if>
+            <if test="srr != null">
+                srr = #{srr,jdbcType=VARCHAR},
+            </if>
+            <if test="dljg != null">
+                dljg = #{dljg,jdbcType=VARCHAR},
+            </if>
+            <if test="zryy != null">
+                zryy = #{zryy,jdbcType=VARCHAR},
+            </if>
+            <if test="zrwcr != null">
+                zrwcr = #{zrwcr,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+        and pid = #{pid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.BrandZr">
+    update brand_zr
+    set zrslr = #{zrslr,jdbcType=DATE},
+      srr = #{srr,jdbcType=VARCHAR},
+      dljg = #{dljg,jdbcType=VARCHAR},
+      zryy = #{zryy,jdbcType=VARCHAR},
+      zrwcr = #{zrwcr,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </update>
+
+    <!--商标转让信息-->
+    <resultMap id="BrandZrInfo" type="com.wqy.pojo.brand.BrandZrInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <id column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="brandStyle" jdbcType="VARCHAR" property="brandStyle"/>
+        <result column="brandName" jdbcType="VARCHAR" property="brandName"/>
+        <result column="applyNumber" jdbcType="VARCHAR" property="applyNumber"/>
+        <result column="applyName" jdbcType="VARCHAR" property="applyName"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="groups" jdbcType="VARCHAR" property="groups"/>
+        <result column="applyDate" jdbcType="DATE" property="applyDate"/>
+        <result column="authorization" jdbcType="DATE" property="authorization"/>
+        <result column="zrslr" jdbcType="DATE" property="zrslr"/>
+        <result column="srr" jdbcType="VARCHAR" property="srr"/>
+        <result column="dljg" jdbcType="VARCHAR" property="dljg"/>
+        <result column="zryy" jdbcType="VARCHAR" property="zryy"/>
+        <result column="zrwcr" jdbcType="DATE" property="zrwcr"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <!--查询商标转让数据列表-->
+    <select id="listEX" resultMap="BrandZrInfo" parameterType="com.wqy.model.brand.WebBrandZrInfo">
+        select
+        b.id,
+        b.pid,
+        a.brandStyle,
+        a.brandName,
+        a.applyNumber,
+        a.applyName,
+        a.category,
+        a.groups,
+        a.applyDate,
+        a.authorization,
+        a.address,
+        b.zrslr,
+        b.srr,
+        b.dljg,
+        b.zryy,
+        b.zrwcr
+        from brand a left join brand_zr b on a.id = b.pid
+        <where>
+            <if test="brandName!=null and brandName!=''">
+                a.brandName like concat('%',concat(#{brandName},'%'))
+            </if>
+            <if test="category!=null and category!=''">
+                and a.category=#{category}
+            </if>
+            <if test="applyNumber!=null and applyNumber !=''">
+                and a.applyNumber=#{applyNumber}
+            </if>
+            <if test="apply_date_start !=null and apply_date_start !=''">
+                and a.applyDate <![CDATA[>= ]]> #{apply_date_start}
+            </if>
+            <if test="apply_date_end !=null and apply_date_end !=''">
+                and a.applyDate <![CDATA[<= ]]> #{apply_date_end}
+            </if>
+            <if test="hid_value_address != '' and hid_value_address !=null ">
+                and address in
+                <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+        <if test="sort !=null and sort!=''">
+            order by ${sort} ${order}
+        </if>
+    </select>
+
+</mapper>

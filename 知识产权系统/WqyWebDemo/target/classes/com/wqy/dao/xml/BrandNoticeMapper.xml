@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.BrandNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.wqy.entity.BrandNotice">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="txrq" jdbcType="DATE" property="txrq" />
+    <result column="yxrq" jdbcType="DATE" property="yxrq" />
+    <result column="xzrq" jdbcType="DATE" property="xzrq" />
+    <result column="xztxrq" jdbcType="DATE" property="xztxrq" />
+    <result column="gwcljxtxrq" jdbcType="DATE" property="gwcljxtxrq" />
+    <result column="jxrq1" jdbcType="DATE" property="jxrq1" />
+    <result column="jxrq2" jdbcType="DATE" property="jxrq2" />
+    <result column="jxrq3" jdbcType="DATE" property="jxrq3" />
+    <result column="jxrq4" jdbcType="DATE" property="jxrq4" />
+    <result column="jxrq5" jdbcType="DATE" property="jxrq5" />
+    <result column="jxrq6" jdbcType="DATE" property="jxrq6" />
+    <result column="jxrq7" jdbcType="DATE" property="jxrq7" />
+    <result column="jxrq8" jdbcType="DATE" property="jxrq8" />
+    <result column="jxrq9" jdbcType="DATE" property="jxrq9" />
+    <result column="jxrq10" jdbcType="DATE" property="jxrq10" />
+    <result column="enables" jdbcType="VARCHAR" property="enables" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pid, txrq, yxrq, xzrq, xztxrq, gwcljxtxrq, jxrq1, jxrq2, jxrq3, jxrq4, jxrq5, 
+    jxrq6, jxrq7, jxrq8, jxrq9, jxrq10, enables
+  </sql>
+  <select id="selectByExample" parameterType="com.wqy.entity.BrandNoticeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brand_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.wqy.entity.BrandNoticeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brand_notice
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.wqy.entity.BrandNoticeKey">
+    delete from brand_notice
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wqy.entity.BrandNoticeExample">
+    delete from brand_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wqy.entity.BrandNotice">
+    insert into brand_notice (id, pid, txrq, yxrq, 
+      xzrq, xztxrq, gwcljxtxrq, jxrq1, 
+      jxrq2, jxrq3, jxrq4, jxrq5, 
+      jxrq6, jxrq7, jxrq8, jxrq9, 
+      jxrq10, enables)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{txrq,jdbcType=DATE}, #{yxrq,jdbcType=DATE}, 
+      #{xzrq,jdbcType=DATE}, #{xztxrq,jdbcType=DATE}, #{gwcljxtxrq,jdbcType=DATE}, #{jxrq1,jdbcType=DATE}, 
+      #{jxrq2,jdbcType=DATE}, #{jxrq3,jdbcType=DATE}, #{jxrq4,jdbcType=DATE}, #{jxrq5,jdbcType=DATE}, 
+      #{jxrq6,jdbcType=DATE}, #{jxrq7,jdbcType=DATE}, #{jxrq8,jdbcType=DATE}, #{jxrq9,jdbcType=DATE}, 
+      #{jxrq10,jdbcType=DATE}, #{enables,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqy.entity.BrandNotice">
+    insert into brand_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="txrq != null">
+        txrq,
+      </if>
+      <if test="yxrq != null">
+        yxrq,
+      </if>
+      <if test="xzrq != null">
+        xzrq,
+      </if>
+      <if test="xztxrq != null">
+        xztxrq,
+      </if>
+      <if test="gwcljxtxrq != null">
+        gwcljxtxrq,
+      </if>
+      <if test="jxrq1 != null">
+        jxrq1,
+      </if>
+      <if test="jxrq2 != null">
+        jxrq2,
+      </if>
+      <if test="jxrq3 != null">
+        jxrq3,
+      </if>
+      <if test="jxrq4 != null">
+        jxrq4,
+      </if>
+      <if test="jxrq5 != null">
+        jxrq5,
+      </if>
+      <if test="jxrq6 != null">
+        jxrq6,
+      </if>
+      <if test="jxrq7 != null">
+        jxrq7,
+      </if>
+      <if test="jxrq8 != null">
+        jxrq8,
+      </if>
+      <if test="jxrq9 != null">
+        jxrq9,
+      </if>
+      <if test="jxrq10 != null">
+        jxrq10,
+      </if>
+      <if test="enables != null">
+        enables,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="txrq != null">
+        #{txrq,jdbcType=DATE},
+      </if>
+      <if test="yxrq != null">
+        #{yxrq,jdbcType=DATE},
+      </if>
+      <if test="xzrq != null">
+        #{xzrq,jdbcType=DATE},
+      </if>
+      <if test="xztxrq != null">
+        #{xztxrq,jdbcType=DATE},
+      </if>
+      <if test="gwcljxtxrq != null">
+        #{gwcljxtxrq,jdbcType=DATE},
+      </if>
+      <if test="jxrq1 != null">
+        #{jxrq1,jdbcType=DATE},
+      </if>
+      <if test="jxrq2 != null">
+        #{jxrq2,jdbcType=DATE},
+      </if>
+      <if test="jxrq3 != null">
+        #{jxrq3,jdbcType=DATE},
+      </if>
+      <if test="jxrq4 != null">
+        #{jxrq4,jdbcType=DATE},
+      </if>
+      <if test="jxrq5 != null">
+        #{jxrq5,jdbcType=DATE},
+      </if>
+      <if test="jxrq6 != null">
+        #{jxrq6,jdbcType=DATE},
+      </if>
+      <if test="jxrq7 != null">
+        #{jxrq7,jdbcType=DATE},
+      </if>
+      <if test="jxrq8 != null">
+        #{jxrq8,jdbcType=DATE},
+      </if>
+      <if test="jxrq9 != null">
+        #{jxrq9,jdbcType=DATE},
+      </if>
+      <if test="jxrq10 != null">
+        #{jxrq10,jdbcType=DATE},
+      </if>
+      <if test="enables != null">
+        #{enables,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wqy.entity.BrandNoticeExample" resultType="java.lang.Long">
+    select count(*) from brand_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brand_notice
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txrq != null">
+        txrq = #{record.txrq,jdbcType=DATE},
+      </if>
+      <if test="record.yxrq != null">
+        yxrq = #{record.yxrq,jdbcType=DATE},
+      </if>
+      <if test="record.xzrq != null">
+        xzrq = #{record.xzrq,jdbcType=DATE},
+      </if>
+      <if test="record.xztxrq != null">
+        xztxrq = #{record.xztxrq,jdbcType=DATE},
+      </if>
+      <if test="record.gwcljxtxrq != null">
+        gwcljxtxrq = #{record.gwcljxtxrq,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq1 != null">
+        jxrq1 = #{record.jxrq1,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq2 != null">
+        jxrq2 = #{record.jxrq2,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq3 != null">
+        jxrq3 = #{record.jxrq3,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq4 != null">
+        jxrq4 = #{record.jxrq4,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq5 != null">
+        jxrq5 = #{record.jxrq5,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq6 != null">
+        jxrq6 = #{record.jxrq6,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq7 != null">
+        jxrq7 = #{record.jxrq7,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq8 != null">
+        jxrq8 = #{record.jxrq8,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq9 != null">
+        jxrq9 = #{record.jxrq9,jdbcType=DATE},
+      </if>
+      <if test="record.jxrq10 != null">
+        jxrq10 = #{record.jxrq10,jdbcType=DATE},
+      </if>
+      <if test="record.enables != null">
+        enables = #{record.enables,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brand_notice
+    set id = #{record.id,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=VARCHAR},
+      txrq = #{record.txrq,jdbcType=DATE},
+      yxrq = #{record.yxrq,jdbcType=DATE},
+      xzrq = #{record.xzrq,jdbcType=DATE},
+      xztxrq = #{record.xztxrq,jdbcType=DATE},
+      gwcljxtxrq = #{record.gwcljxtxrq,jdbcType=DATE},
+      jxrq1 = #{record.jxrq1,jdbcType=DATE},
+      jxrq2 = #{record.jxrq2,jdbcType=DATE},
+      jxrq3 = #{record.jxrq3,jdbcType=DATE},
+      jxrq4 = #{record.jxrq4,jdbcType=DATE},
+      jxrq5 = #{record.jxrq5,jdbcType=DATE},
+      jxrq6 = #{record.jxrq6,jdbcType=DATE},
+      jxrq7 = #{record.jxrq7,jdbcType=DATE},
+      jxrq8 = #{record.jxrq8,jdbcType=DATE},
+      jxrq9 = #{record.jxrq9,jdbcType=DATE},
+      jxrq10 = #{record.jxrq10,jdbcType=DATE},
+      enables = #{record.enables,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.BrandNotice">
+    update brand_notice
+    <set>
+      <if test="txrq != null">
+        txrq = #{txrq,jdbcType=DATE},
+      </if>
+      <if test="yxrq != null">
+        yxrq = #{yxrq,jdbcType=DATE},
+      </if>
+      <if test="xzrq != null">
+        xzrq = #{xzrq,jdbcType=DATE},
+      </if>
+      <if test="xztxrq != null">
+        xztxrq = #{xztxrq,jdbcType=DATE},
+      </if>
+      <if test="gwcljxtxrq != null">
+        gwcljxtxrq = #{gwcljxtxrq,jdbcType=DATE},
+      </if>
+      <if test="jxrq1 != null">
+        jxrq1 = #{jxrq1,jdbcType=DATE},
+      </if>
+      <if test="jxrq2 != null">
+        jxrq2 = #{jxrq2,jdbcType=DATE},
+      </if>
+      <if test="jxrq3 != null">
+        jxrq3 = #{jxrq3,jdbcType=DATE},
+      </if>
+      <if test="jxrq4 != null">
+        jxrq4 = #{jxrq4,jdbcType=DATE},
+      </if>
+      <if test="jxrq5 != null">
+        jxrq5 = #{jxrq5,jdbcType=DATE},
+      </if>
+      <if test="jxrq6 != null">
+        jxrq6 = #{jxrq6,jdbcType=DATE},
+      </if>
+      <if test="jxrq7 != null">
+        jxrq7 = #{jxrq7,jdbcType=DATE},
+      </if>
+      <if test="jxrq8 != null">
+        jxrq8 = #{jxrq8,jdbcType=DATE},
+      </if>
+      <if test="jxrq9 != null">
+        jxrq9 = #{jxrq9,jdbcType=DATE},
+      </if>
+      <if test="jxrq10 != null">
+        jxrq10 = #{jxrq10,jdbcType=DATE},
+      </if>
+      <if test="enables != null">
+        enables = #{enables,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqy.entity.BrandNotice">
+    update brand_notice
+    set txrq = #{txrq,jdbcType=DATE},
+      yxrq = #{yxrq,jdbcType=DATE},
+      xzrq = #{xzrq,jdbcType=DATE},
+      xztxrq = #{xztxrq,jdbcType=DATE},
+      gwcljxtxrq = #{gwcljxtxrq,jdbcType=DATE},
+      jxrq1 = #{jxrq1,jdbcType=DATE},
+      jxrq2 = #{jxrq2,jdbcType=DATE},
+      jxrq3 = #{jxrq3,jdbcType=DATE},
+      jxrq4 = #{jxrq4,jdbcType=DATE},
+      jxrq5 = #{jxrq5,jdbcType=DATE},
+      jxrq6 = #{jxrq6,jdbcType=DATE},
+      jxrq7 = #{jxrq7,jdbcType=DATE},
+      jxrq8 = #{jxrq8,jdbcType=DATE},
+      jxrq9 = #{jxrq9,jdbcType=DATE},
+      jxrq10 = #{jxrq10,jdbcType=DATE},
+      enables = #{enables,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </update>
+
+  <!--商标提醒信息-->
+  <resultMap id="BrandNoticeInfo" type="com.wqy.pojo.brand.BrandNoticeInfo">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <id column="pid" jdbcType="VARCHAR" property="pid"/>
+    <result column="brandStyle" jdbcType="VARCHAR" property="brandStyle"/>
+    <result column="brandName" jdbcType="VARCHAR" property="brandName"/>
+    <result column="applyNumber" jdbcType="VARCHAR" property="applyNumber"/>
+    <result column="applyName" jdbcType="VARCHAR" property="applyName"/>
+    <result column="category" jdbcType="VARCHAR" property="category"/>
+    <result column="groups" jdbcType="VARCHAR" property="groups"/>
+    <result column="applyDate" jdbcType="DATE" property="applyDate"/>
+    <result column="zcggr" jdbcType="DATE" property="zcggr"/>
+    <result column="deadline" jdbcType="DATE" property="deadline"/>
+    <result column="txrq" jdbcType="DATE" property="txrq"/>
+    <result column="zcggr" jdbcType="DATE" property="zcggr"/>
+    <result column="yxrq" jdbcType="DATE" property="yxrq"/>
+    <result column="xzrq" jdbcType="DATE" property="xzrq"/>
+    <result column="xztxrq" jdbcType="DATE" property="xztxrq"/>
+    <result column="gwcljxtxrq" jdbcType="DATE" property="gwcljxtxrq"/>
+    <result column="enables" jdbcType="VARCHAR" property="enables"/>
+    <result column="jxrq1" jdbcType="DATE" property="jxrq1"/>
+    <result column="jxrq2" jdbcType="DATE" property="jxrq2"/>
+    <result column="jxrq3" jdbcType="DATE" property="jxrq3"/>
+    <result column="jxrq4" jdbcType="DATE" property="jxrq4"/>
+    <result column="jxrq5" jdbcType="DATE" property="jxrq5"/>
+    <result column="jxrq6" jdbcType="DATE" property="jxrq6"/>
+    <result column="jxrq7" jdbcType="DATE" property="jxrq7"/>
+    <result column="jxrq8" jdbcType="DATE" property="jxrq8"/>
+    <result column="jxrq9" jdbcType="DATE" property="jxrq9"/>
+    <result column="jxrq10" jdbcType="DATE" property="jxrq10"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+  </resultMap>
+
+  <!-- 分页版 查询商标提醒列表-->
+  <select id="listEX" resultMap="BrandNoticeInfo" parameterType="com.wqy.model.notice.WebNoticeBrandInfo">
+    select
+    b.pid,
+    b.id,
+    a.brandStyle,
+    a.brandName,
+    a.applyNumber,
+    a.applyName,
+    a.category,
+    a.groups,
+    a.applyDate,
+    a.zcggr,
+    a.category,
+    a.address,
+    a.deadline,
+    b.txrq,
+    b.yxrq,
+    b.xzrq,
+    b.xztxrq,
+    b.gwcljxtxrq,
+    b.enables,
+    b.jxrq1,
+    b.jxrq2,
+    b.jxrq3,
+    b.jxrq4,
+    b.jxrq5,
+    b.jxrq6,
+    b.jxrq7,
+    b.jxrq8,
+    b.jxrq9,
+    b.jxrq10
+    from brand a right join brand_notice b on a.id = b.pid
+    <where>
+      <if test="enables!=null and enables!=''">
+        and b.enables=#{enables}
+      </if>
+      <if test="category!=null and category!=''">
+        and a.category=#{category}
+      </if>
+      <if test="applyNumber!=null and applyNumber !=''">
+        and a.applyNumber=#{applyNumber}
+      </if>
+      <if test="apply_date_start !=null and apply_date_start !=''">
+        and a.applyDate <![CDATA[>= ]]> #{apply_date_start}
+      </if>
+      <if test="apply_date_end !=null and apply_date_end !=''">
+        and a.applyDate <![CDATA[<= ]]> #{apply_date_end}
+      </if>
+      <if test="hid_value_address!=null and hid_value_address!=''">
+        and a.address in (#{hid_value_address})
+      </if>
+      <if test="hid_value_address != '' and hid_value_address !=null ">
+        and address in
+        <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+          #{listItem}
+        </foreach>
+      </if>
+    </where>
+    <if test="sort != null and sort !=''">
+      order by ${sort} ${order}
+    </if>
+  </select>
+
+  <!--根据是否开启状态查询提醒数据-->
+  <select id="selectByEnables" parameterType="java.lang.String" resultMap="BrandNoticeInfo">
+        select
+        b.pid,
+        b.id,
+        a.brandStyle,
+        a.brandName,
+        a.applyNumber,
+        a.applyName,
+        a.category,
+        a.groups,
+        a.applyDate,
+        a.zcggr,
+        a.deadline,
+        a.txrq,
+        a.zcggr,
+        b.yxrq,
+        b.xzrq,
+        b.xztxrq,
+        b.gwcljxtxrq,
+        b.enables,
+        b.jxrq1,
+        b.jxrq2,
+        b.jxrq3,
+        b.jxrq4,
+        b.jxrq5,
+        b.jxrq6,
+        b.jxrq7,
+        b.jxrq8,
+        b.jxrq9,
+        b.jxrq10
+        from brand a right join brand_notice b on a.id = b.pid where b.enables = #{enables}
+    </select>
+</mapper>

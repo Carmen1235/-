@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.PatentAcceptMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.PatentAccept">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="assign_number" jdbcType="VARCHAR" property="assignNumber"/>
+        <result column="assign_name" jdbcType="VARCHAR" property="assignName"/>
+        <result column="accept_name" jdbcType="VARCHAR" property="acceptName"/>
+        <result column="accept_date" jdbcType="DATE" property="acceptDate"/>
+        <result column="accept_finish_date" jdbcType="DATE" property="acceptFinishDate"/>
+        <result column="other" jdbcType="VARCHAR" property="other"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, pid, assign_number, assign_name, accept_name, accept_date, accept_finish_date, 
+    other
+  </sql>
+    <select id="selectByExample" parameterType="com.wqy.entity.PatentAcceptExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from patent_accept
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from patent_accept
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from patent_accept
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.PatentAcceptExample">
+        delete from patent_accept
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.PatentAccept">
+    insert into patent_accept (id, pid, assign_number, 
+      assign_name, accept_name, accept_date, 
+      accept_finish_date, other)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{assignNumber,jdbcType=VARCHAR}, 
+      #{assignName,jdbcType=VARCHAR}, #{acceptName,jdbcType=VARCHAR}, #{acceptDate,jdbcType=DATE}, 
+      #{acceptFinishDate,jdbcType=DATE}, #{other,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.PatentAccept">
+        insert into patent_accept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="assignNumber != null">
+                assign_number,
+            </if>
+            <if test="assignName != null">
+                assign_name,
+            </if>
+            <if test="acceptName != null">
+                accept_name,
+            </if>
+            <if test="acceptDate != null">
+                accept_date,
+            </if>
+            <if test="acceptFinishDate != null">
+                accept_finish_date,
+            </if>
+            <if test="other != null">
+                other,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="assignNumber != null">
+                #{assignNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="assignName != null">
+                #{assignName,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptName != null">
+                #{acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptDate != null">
+                #{acceptDate,jdbcType=DATE},
+            </if>
+            <if test="acceptFinishDate != null">
+                #{acceptFinishDate,jdbcType=DATE},
+            </if>
+            <if test="other != null">
+                #{other,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.PatentAcceptExample" resultType="java.lang.Long">
+        select count(*) from patent_accept
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update patent_accept
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assignNumber != null">
+                assign_number = #{record.assignNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assignName != null">
+                assign_name = #{record.assignName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.acceptName != null">
+                accept_name = #{record.acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.acceptDate != null">
+                accept_date = #{record.acceptDate,jdbcType=DATE},
+            </if>
+            <if test="record.acceptFinishDate != null">
+                accept_finish_date = #{record.acceptFinishDate,jdbcType=DATE},
+            </if>
+            <if test="record.other != null">
+                other = #{record.other,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update patent_accept
+        set id = #{record.id,jdbcType=VARCHAR},
+        pid = #{record.pid,jdbcType=VARCHAR},
+        assign_number = #{record.assignNumber,jdbcType=VARCHAR},
+        assign_name = #{record.assignName,jdbcType=VARCHAR},
+        accept_name = #{record.acceptName,jdbcType=VARCHAR},
+        accept_date = #{record.acceptDate,jdbcType=DATE},
+        accept_finish_date = #{record.acceptFinishDate,jdbcType=DATE},
+        other = #{record.other,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.PatentAccept">
+        update patent_accept
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="assignNumber != null">
+                assign_number = #{assignNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="assignName != null">
+                assign_name = #{assignName,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptName != null">
+                accept_name = #{acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptDate != null">
+                accept_date = #{acceptDate,jdbcType=DATE},
+            </if>
+            <if test="acceptFinishDate != null">
+                accept_finish_date = #{acceptFinishDate,jdbcType=DATE},
+            </if>
+            <if test="other != null">
+                other = #{other,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.PatentAccept">
+    update patent_accept
+    set pid = #{pid,jdbcType=VARCHAR},
+      assign_number = #{assignNumber,jdbcType=VARCHAR},
+      assign_name = #{assignName,jdbcType=VARCHAR},
+      accept_name = #{acceptName,jdbcType=VARCHAR},
+      accept_date = #{acceptDate,jdbcType=DATE},
+      accept_finish_date = #{acceptFinishDate,jdbcType=DATE},
+      other = #{other,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <!--专利转让数据信息-->
+    <resultMap id="PatentAccepInfo" type="com.wqy.pojo.patent.PatentAcceptInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="technical_classification" jdbcType="VARCHAR" property="technical_classification"/>
+        <result column="patentName" jdbcType="VARCHAR" property="patentName"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="protected_areas" jdbcType="VARCHAR" property="protected_areas"/>
+        <result column="patent_type" jdbcType="VARCHAR" property="patent_type"/>
+        <result column="apply_date" jdbcType="DATE" property="apply_date"/>
+        <result column="apply_name" jdbcType="VARCHAR" property="apply_name"/>
+        <result column="apply_number" jdbcType="VARCHAR" property="apply_number"/>
+        <result column="accredit_date" jdbcType="DATE" property="accredit_date"/>
+        <result column="patent_number" jdbcType="VARCHAR" property="patent_number"/>
+        <result column="egency" jdbcType="VARCHAR" property="egency"/>
+        <result column="assign_number" jdbcType="VARCHAR" property="assign_number"/>
+        <result column="assign_name" jdbcType="VARCHAR" property="assign_name"/>
+        <result column="accept_name" jdbcType="VARCHAR" property="accept_name"/>
+        <result column="accept_date" jdbcType="DATE" property="accept_date"/>
+        <result column="accept_finish_date" jdbcType="VARCHAR" property="accept_finish_date"/>
+        <result column="other" jdbcType="VARCHAR" property="other"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <!--查询专利转让数据列表-->
+    <select id="listEX" resultMap="PatentAccepInfo" parameterType="com.wqy.model.patent.WebPatentAcceptInfo">
+        select
+        b.id,
+        b.pid,
+        a.technical_classification,
+        a.patentName,
+        a.image,
+        a.protected_areas,
+        a.patent_type,
+        a.apply_date,
+        a.apply_name,
+        a.apply_number,
+        a.accredit_date,
+        a.patent_number,
+        a.egency,
+        a.address,
+        b.assign_number,
+        b.assign_name,
+        b.accept_name,
+        b.accept_date,
+        b.accept_finish_date,
+        b.other
+        from patent a left join patent_accept b on a.id = b.pid
+
+        <where>
+            <if test="patentName!=null and patentName!=''">
+                a.patentName like concat('%',concat(#{patentName},'%'))
+            </if>
+            <if test="patent_number!=null and patent_number!=''">
+                and a.patent_number = #{patent_number}
+            </if>
+            <if test="apply_number!=null and apply_number!=''">
+                and a.apply_number = #{apply_number}
+            </if>
+            <if test="technical_classification!=null and technical_classification!=''">
+                and a.technical_classification = #{technical_classification}
+            </if>
+            <if test="protected_areas!=null and protected_areas!=''">
+                and a.protected_areas = #{protected_areas}
+            </if>
+            <if test="apply_name!=null and apply_name!=''">
+                and a.apply_name=#{apply_name}
+            </if>
+            <if test="apply_date_start!=null and apply_date_start!=''">
+                and a.apply_date <![CDATA[>= ]]> #{apply_date_start}
+            </if>
+            <if test="apply_date_end!=null and apply_date_end!=''">
+                and a.apply_date <![CDATA[<= ]]> #{apply_date_end}
+            </if>
+            <if test="accredit_date_start!=null and accredit_date_start!=''">
+                and a.accredit_date <![CDATA[>= ]]> #{accredit_date_start}
+            </if>
+            <if test="accredit_date_end!=null and accredit_date_end!=''">
+                and a.accredit_date <![CDATA[<= ]]> #{accredit_date_end}
+            </if>
+            <if test="hid_value_address != '' and hid_value_address !=null ">
+                and address in
+                <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <!--查询专利转让数据列表-->
+    <select id="list" resultMap="PatentAccepInfo" parameterType="com.wqy.util.LimitElements">
+      select
+            b.id,
+            b.pid,
+            a.technical_classification,
+            a.patentName,
+            a.image,
+            a.protected_areas,
+            a.patent_type,
+            a.apply_date,
+            a.apply_name,
+            a.apply_number,
+            a.accredit_date,
+            a.patent_number,
+            a.egency,
+            b.assign_number,
+            b.assign_name,
+            b.accept_name,
+            b.accept_date,
+            b.accept_finish_date,
+            b.other
+        from patent a left join patent_accept b on a.id = b.pid limit #{start},#{size};
+  </select>
+    <!--查询专利转让数据总数-->
+    <select id="count" resultType="java.lang.Long">
+    select count(*) from patent_accept;
+  </select>
+    <!--根据条件查询-->
+    <select id="selectByXX" resultMap="PatentAccepInfo" parameterType="java.lang.String">
+    select
+    b.id,
+    b.pid,
+    a.technical_classification,
+    a.patentName,
+    a.image,
+    a.protected_areas,
+    a.patent_type,
+    a.apply_date,
+    a.apply_name,
+    a.apply_number,
+    a.accredit_date,
+    a.patent_number,
+    a.egency,
+    b.assign_number,
+    b.assign_name,
+    b.accept_name,
+    b.accept_date,
+    b.accept_finish_date,
+    b.other
+    from patent a left join patent_accept b on a.id = b.pid where a.patentName like concat('%',concat(#{searchPantentName},'%'));
+  </select>
+</mapper>

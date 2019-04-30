@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{fragment/header::header}">
+</head>
+<body>
+<!--<body class="layui-layout-body"> 使用后五滚动条-->
+<div class="layui-layout layui-layout-admin">
+    <!--Top顶部 使用nav.Html统一管理-->
+    <div th:replace="~{fragment/nav::nav}"></div>
+
+    <!--Body部分-->
+    <div class="layui-layout-body">
+        <blockquote class="layui-elem-quote">关于万汇 HR报表平台介绍</blockquote>
+        <div class="layui-row">
+            <div class="layui-container" style="text-align: center;color: #5FB878;margin: 5px auto">
+                <h1>操作方法如下</h1>
+                <img src="/images/about/export.gif" style="height: 600px">
+            </div>
+            <!--<div class="layui-carousel" id="aboutCarousel">-->
+                <!--<div carousel-item>-->
+                    <!--<div></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="layui-row">
+
+            <br>
+            <div class="layui-container" style="text-align: center;color: #5FB878;margin: 5px auto">
+                <h1>关于</h1>
+                <h3>开发起点：用于BPM系统中的ESS流程的加班单、加班申请单使用</h3>
+                <h3>为了加快工作的效率！</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/footer::footer}">...</div>
+<script>
+    var carousel = layui.carousel;
+    carousel.render({
+        elem: '#aboutCarousel'
+        ,width: '100%' //设置容器宽度
+        ,arrow: 'always' //始终显示箭头
+        //,anim: 'updown' //切换动画方式
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.BrandXkMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.BrandXk">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <id column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="bxkf" jdbcType="VARCHAR" property="bxkf"/>
+        <result column="bxkqx" jdbcType="VARCHAR" property="bxkqx"/>
+        <result column="bxkspjfw" jdbcType="VARCHAR" property="bxkspjfw"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, pid, bxkf, bxkqx, bxkspjfw
+  </sql>
+    <select id="selectByExample" parameterType="com.wqy.entity.BrandXkExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from brand_xk
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="com.wqy.entity.BrandXkKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from brand_xk
+        where id = #{id,jdbcType=VARCHAR}
+        and pid = #{pid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.wqy.entity.BrandXkKey">
+    delete from brand_xk
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.BrandXkExample">
+        delete from brand_xk
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.BrandXk">
+    insert into brand_xk (id, pid, bxkf, 
+      bxkqx, bxkspjfw)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{bxkf,jdbcType=VARCHAR}, 
+      #{bxkqx,jdbcType=VARCHAR}, #{bxkspjfw,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.BrandXk">
+        insert into brand_xk
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="bxkf != null">
+                bxkf,
+            </if>
+            <if test="bxkqx != null">
+                bxkqx,
+            </if>
+            <if test="bxkspjfw != null">
+                bxkspjfw,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="bxkf != null">
+                #{bxkf,jdbcType=VARCHAR},
+            </if>
+            <if test="bxkqx != null">
+                #{bxkqx,jdbcType=VARCHAR},
+            </if>
+            <if test="bxkspjfw != null">
+                #{bxkspjfw,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.BrandXkExample" resultType="java.lang.Long">
+        select count(*) from brand_xk
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update brand_xk
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bxkf != null">
+                bxkf = #{record.bxkf,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bxkqx != null">
+                bxkqx = #{record.bxkqx,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bxkspjfw != null">
+                bxkspjfw = #{record.bxkspjfw,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update brand_xk
+        set id = #{record.id,jdbcType=VARCHAR},
+        pid = #{record.pid,jdbcType=VARCHAR},
+        bxkf = #{record.bxkf,jdbcType=VARCHAR},
+        bxkqx = #{record.bxkqx,jdbcType=VARCHAR},
+        bxkspjfw = #{record.bxkspjfw,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.BrandXk">
+        update brand_xk
+        <set>
+            <if test="bxkf != null">
+                bxkf = #{bxkf,jdbcType=VARCHAR},
+            </if>
+            <if test="bxkqx != null">
+                bxkqx = #{bxkqx,jdbcType=VARCHAR},
+            </if>
+            <if test="bxkspjfw != null">
+                bxkspjfw = #{bxkspjfw,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+        and pid = #{pid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.BrandXk">
+    update brand_xk
+    set bxkf = #{bxkf,jdbcType=VARCHAR},
+      bxkqx = #{bxkqx,jdbcType=VARCHAR},
+      bxkspjfw = #{bxkspjfw,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+      and pid = #{pid,jdbcType=VARCHAR}
+  </update>
+
+    <!--商标许可信息-->
+    <resultMap id="BrandXkInfo" type="com.wqy.pojo.brand.BrandXkInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <id column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="brandStyle" jdbcType="VARCHAR" property="brandStyle"/>
+        <result column="brandName" jdbcType="VARCHAR" property="brandName"/>
+        <result column="applyNumber" jdbcType="VARCHAR" property="applyNumber"/>
+        <result column="applyName" jdbcType="VARCHAR" property="applyName"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="groups" jdbcType="VARCHAR" property="groups"/>
+        <result column="applyDate" jdbcType="DATE" property="applyDate"/>
+        <result column="authorization" jdbcType="DATE" property="authorization"/>
+        <result column="bxkf" jdbcType="VARCHAR" property="bxkf"/>
+        <result column="bxkqx" jdbcType="VARCHAR" property="bxkqx"/>
+        <result column="bxkspjfw" jdbcType="VARCHAR" property="bxkspjfw"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <!--查询商标许可数据列表-->
+    <select id="listEX" resultMap="BrandXkInfo" parameterType="com.wqy.model.brand.WebBrandXkInfo">
+        select
+        b.id,
+        b.pid,
+        a.brandStyle,
+        a.brandName,
+        a.applyNumber,
+        a.applyName,
+        a.category,
+        a.groups,
+        a.applyDate,
+        a.authorization,
+        a.address,
+        b.bxkf,
+        b.bxkqx,
+        b.bxkspjfw
+        from brand a left join brand_xk b on a.id = b.pid
+        <where>
+            <if test="brandName!=null and brandName!=''">
+                a.brandName like concat('%',concat(#{brandName},'%'))
+            </if>
+            <if test="category!=null and category!=''">
+                and a.category=#{category}
+            </if>
+            <if test="applyNumber!=null and applyNumber !=''">
+                and a.applyNumber=#{applyNumber}
+            </if>
+            <if test="apply_date_start !=null and apply_date_start !=''">
+                and a.applyDate <![CDATA[>= ]]> #{apply_date_start}
+            </if>
+            <if test="apply_date_end !=null and apply_date_end !=''">
+                and a.applyDate <![CDATA[<= ]]> #{apply_date_end}
+            </if>
+            <if test="hid_value_address != '' and hid_value_address !=null ">
+                and address in
+                <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+        <if test="sort != null and sort !=''">
+            order by ${sort} ${order}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.BrandJcMapper">
+  <resultMap id="BaseResultMap" type="com.wqy.entity.BrandJc">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="applyNumber" jdbcType="VARCHAR" property="applyNumber" />
+    <result column="applyName" jdbcType="VARCHAR" property="applyName" />
+    <result column="sbType" jdbcType="VARCHAR" property="sbType" />
+    <result column="groups" jdbcType="VARCHAR" property="groups" />
+    <result column="applyDate" jdbcType="DATE" property="applyDate" />
+    <result column="startDate" jdbcType="DATE" property="startDate" />
+    <result column="endDate" jdbcType="DATE" property="endDate" />
+    <result column="results" jdbcType="VARCHAR" property="results" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, image, applyNumber, applyName, sbType, groups, applyDate, startDate, endDate, 
+    results
+  </sql>
+  <select id="selectByExample" parameterType="com.wqy.entity.BrandJcExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brand_jc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brand_jc
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from brand_jc
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wqy.entity.BrandJcExample">
+    delete from brand_jc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wqy.entity.BrandJc">
+    insert into brand_jc (id, image, applyNumber, 
+      applyName, sbType, groups, 
+      applyDate, startDate, endDate, 
+      results)
+    values (#{id,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{applyNumber,jdbcType=VARCHAR}, 
+      #{applyName,jdbcType=VARCHAR}, #{sbType,jdbcType=VARCHAR}, #{groups,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=DATE}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{results,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqy.entity.BrandJc">
+    insert into brand_jc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="applyNumber != null">
+        applyNumber,
+      </if>
+      <if test="applyName != null">
+        applyName,
+      </if>
+      <if test="sbType != null">
+        sbType,
+      </if>
+      <if test="groups != null">
+        groups,
+      </if>
+      <if test="applyDate != null">
+        applyDate,
+      </if>
+      <if test="startDate != null">
+        startDate,
+      </if>
+      <if test="endDate != null">
+        endDate,
+      </if>
+      <if test="results != null">
+        results,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null">
+        #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sbType != null">
+        #{sbType,jdbcType=VARCHAR},
+      </if>
+      <if test="groups != null">
+        #{groups,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="results != null">
+        #{results,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wqy.entity.BrandJcExample" resultType="java.lang.Long">
+    select count(*) from brand_jc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brand_jc
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyNumber != null">
+        applyNumber = #{record.applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyName != null">
+        applyName = #{record.applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbType != null">
+        sbType = #{record.sbType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groups != null">
+        groups = #{record.groups,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null">
+        applyDate = #{record.applyDate,jdbcType=DATE},
+      </if>
+      <if test="record.startDate != null">
+        startDate = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        endDate = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.results != null">
+        results = #{record.results,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brand_jc
+    set id = #{record.id,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      applyNumber = #{record.applyNumber,jdbcType=VARCHAR},
+      applyName = #{record.applyName,jdbcType=VARCHAR},
+      sbType = #{record.sbType,jdbcType=VARCHAR},
+      groups = #{record.groups,jdbcType=VARCHAR},
+      applyDate = #{record.applyDate,jdbcType=DATE},
+      startDate = #{record.startDate,jdbcType=DATE},
+      endDate = #{record.endDate,jdbcType=DATE},
+      results = #{record.results,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.BrandJc">
+    update brand_jc
+    <set>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null">
+        applyNumber = #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        applyName = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sbType != null">
+        sbType = #{sbType,jdbcType=VARCHAR},
+      </if>
+      <if test="groups != null">
+        groups = #{groups,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        applyDate = #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="startDate != null">
+        startDate = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        endDate = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="results != null">
+        results = #{results,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqy.entity.BrandJc">
+    update brand_jc
+    set image = #{image,jdbcType=VARCHAR},
+      applyNumber = #{applyNumber,jdbcType=VARCHAR},
+      applyName = #{applyName,jdbcType=VARCHAR},
+      sbType = #{sbType,jdbcType=VARCHAR},
+      groups = #{groups,jdbcType=VARCHAR},
+      applyDate = #{applyDate,jdbcType=DATE},
+      startDate = #{startDate,jdbcType=DATE},
+      endDate = #{endDate,jdbcType=DATE},
+      results = #{results,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

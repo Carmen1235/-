@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.PatentRenewalsNewMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.PatentRenewalsNew">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="annual_fee" jdbcType="VARCHAR" property="annualFee"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, pid, annual_fee
+  </sql>
+    <select id="selectByExample" parameterType="com.wqy.entity.PatentRenewalsNewExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from patent_renewals_new
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from patent_renewals_new
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from patent_renewals_new
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.PatentRenewalsNewExample">
+        delete from patent_renewals_new
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.PatentRenewalsNew">
+    insert into patent_renewals_new (id, pid, annual_fee
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{annualFee,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.PatentRenewalsNew">
+        insert into patent_renewals_new
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="annualFee != null">
+                annual_fee,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="annualFee != null">
+                #{annualFee,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.PatentRenewalsNewExample" resultType="java.lang.Long">
+        select count(*) from patent_renewals_new
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update patent_renewals_new
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.annualFee != null">
+                annual_fee = #{record.annualFee,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update patent_renewals_new
+        set id = #{record.id,jdbcType=VARCHAR},
+        pid = #{record.pid,jdbcType=VARCHAR},
+        annual_fee = #{record.annualFee,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.PatentRenewalsNew">
+        update patent_renewals_new
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="annualFee != null">
+                annual_fee = #{annualFee,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.PatentRenewalsNew">
+    update patent_renewals_new
+    set pid = #{pid,jdbcType=VARCHAR},
+      annual_fee = #{annualFee,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <!--专利续展信息-->
+    <resultMap id="PatentRenewalsNewInfo" type="com.wqy.pojo.patent.PatentRenewalsNewInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="technical_classification" jdbcType="VARCHAR" property="technical_classification"/>
+        <result column="patentName" jdbcType="VARCHAR" property="patentName"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="patent_type" jdbcType="VARCHAR" property="patent_type"/>
+        <result column="protected_areas" jdbcType="VARCHAR" property="protected_areas"/>
+        <result column="apply_type" jdbcType="VARCHAR" property="apply_type"/>
+        <result column="apply_date" jdbcType="DATE" property="apply_date"/>
+        <result column="apply_name" jdbcType="VARCHAR" property="apply_name"/>
+        <result column="apply_number" jdbcType="VARCHAR" property="apply_number"/>
+        <result column="state" jdbcType="VARCHAR" property="state"/>
+        <result column="accredit_date" jdbcType="DATE" property="accredit_date"/>
+        <result column="patent_number" jdbcType="VARCHAR" property="patent_number"/>
+        <result column="egency" jdbcType="VARCHAR" property="egency"/>
+        <result column="annual_fee" jdbcType="VARCHAR" property="annual_fee"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <!--查询专利续展New数据列表-->
+    <select id="listEX" resultMap="PatentRenewalsNewInfo" parameterType="com.wqy.model.patent.WebPatentRenewalsNewInfo">
+        select
+        b.id,
+        b.pid,
+        a.technical_classification,
+        a.patentName,
+        a.image,
+        a.patent_type,
+        a.protected_areas,
+        a.apply_type,
+        a.apply_date,
+        a.apply_name,
+        a.apply_number,
+        a.state,
+        a.accredit_date,
+        a.patent_number,
+        a.egency,
+        a.address,
+        b.annual_fee
+        from patent a left join patent_renewals_new b on a.id = b.pid
+        <where>
+            <if test="patentName!=null and patentName!=''">
+                patentName like concat('%',concat(#{patentName},'%'))
+            </if>
+            <if test="apply_number!=null and apply_number!=''">
+                and apply_number =#{apply_number}
+            </if>
+            <if test="patent_number!=null and patent_number!=''">
+                and patent_number=#{patent_number}
+            </if>
+            <if test="technical_classification!=null and technical_classification!=''">
+                and technical_classification = #{technical_classification}
+            </if>
+            <if test="protected_areas!=null and protected_areas!=''">
+                and protected_areas = #{protected_areas}
+            </if>
+            <if test="state!=null and state!=''">
+                and state=#{state}
+            </if>
+            <if test="apply_name!=null and apply_name!=''">
+                and apply_name=#{apply_name}
+            </if>
+            <if test="apply_date_start!=null and apply_date_start!=''">
+                and apply_date <![CDATA[>= ]]> #{apply_date_start}
+            </if>
+            <if test="apply_date_end!=null and apply_date_end!=''">
+                and apply_date <![CDATA[<= ]]> #{apply_date_end}
+            </if>
+            <if test="accredit_date_start!=null and accredit_date_start!=''">
+                and accredit_date <![CDATA[>= ]]> #{accredit_date_start}
+            </if>
+            <if test="accredit_date_end!=null and accredit_date_end!=''">
+                and accredit_date <![CDATA[<= ]]> #{accredit_date_end}
+            </if>
+            <if test="hid_value_address != '' and hid_value_address !=null ">
+                and address in
+                <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

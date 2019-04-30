@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.IdeaMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.Idea">
+        <id column="t_id" jdbcType="VARCHAR" property="tId"/>
+        <result column="t_wxid" jdbcType="VARCHAR" property="tWxid"/>
+        <result column="t_username" jdbcType="VARCHAR" property="tUsername"/>
+        <result column="t_department" jdbcType="VARCHAR" property="tDepartment"/>
+        <result column="t_userid" jdbcType="VARCHAR" property="tUserid"/>
+        <result column="t_telphone" jdbcType="BIGINT" property="tTelphone"/>
+        <result column="t_createdate" jdbcType="TIMESTAMP" property="tCreatedate"/>
+        <result column="t_nickname" jdbcType="VARCHAR" property="tNickname"/>
+        <result column="t_sort" jdbcType="VARCHAR" property="tSort"/>
+        <result column="t_ex1" jdbcType="VARCHAR" property="tEx1"/>
+        <result column="t_ex2" jdbcType="VARCHAR" property="tEx2"/>
+        <result column="t_ex3" jdbcType="VARCHAR" property="tEx3"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wqy.entity.Idea">
+        <result column="t_question" jdbcType="LONGVARCHAR" property="tQuestion"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    t_id, t_wxid, t_username, t_department, t_userid, t_telphone, t_createdate, t_nickname, 
+    t_sort, t_ex1, t_ex2, t_ex3
+  </sql>
+    <sql id="Blob_Column_List">
+    t_question
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.wqy.entity.IdeaExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from idea
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.wqy.entity.IdeaExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from idea
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from idea
+        where t_id = #{tId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from idea
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.IdeaExample">
+        delete from idea
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.Idea">
+    insert into idea (t_id, t_wxid, t_username, 
+      t_department, t_userid, t_telphone, 
+      t_createdate, t_nickname, t_sort, 
+      t_ex1, t_ex2, t_ex3, t_question
+      )
+    values (#{tId,jdbcType=VARCHAR}, #{tWxid,jdbcType=VARCHAR}, #{tUsername,jdbcType=VARCHAR}, 
+      #{tDepartment,jdbcType=VARCHAR}, #{tUserid,jdbcType=VARCHAR}, #{tTelphone,jdbcType=BIGINT}, 
+      #{tCreatedate,jdbcType=TIMESTAMP}, #{tNickname,jdbcType=VARCHAR}, #{tSort,jdbcType=VARCHAR}, 
+      #{tEx1,jdbcType=VARCHAR}, #{tEx2,jdbcType=VARCHAR}, #{tEx3,jdbcType=VARCHAR}, #{tQuestion,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.Idea">
+        insert into idea
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tId != null">
+                t_id,
+            </if>
+            <if test="tWxid != null">
+                t_wxid,
+            </if>
+            <if test="tUsername != null">
+                t_username,
+            </if>
+            <if test="tDepartment != null">
+                t_department,
+            </if>
+            <if test="tUserid != null">
+                t_userid,
+            </if>
+            <if test="tTelphone != null">
+                t_telphone,
+            </if>
+            <if test="tCreatedate != null">
+                t_createdate,
+            </if>
+            <if test="tNickname != null">
+                t_nickname,
+            </if>
+            <if test="tSort != null">
+                t_sort,
+            </if>
+            <if test="tEx1 != null">
+                t_ex1,
+            </if>
+            <if test="tEx2 != null">
+                t_ex2,
+            </if>
+            <if test="tEx3 != null">
+                t_ex3,
+            </if>
+            <if test="tQuestion != null">
+                t_question,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tId != null">
+                #{tId,jdbcType=VARCHAR},
+            </if>
+            <if test="tWxid != null">
+                #{tWxid,jdbcType=VARCHAR},
+            </if>
+            <if test="tUsername != null">
+                #{tUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="tDepartment != null">
+                #{tDepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="tUserid != null">
+                #{tUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="tTelphone != null">
+                #{tTelphone,jdbcType=BIGINT},
+            </if>
+            <if test="tCreatedate != null">
+                #{tCreatedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tNickname != null">
+                #{tNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="tSort != null">
+                #{tSort,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx1 != null">
+                #{tEx1,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx2 != null">
+                #{tEx2,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx3 != null">
+                #{tEx3,jdbcType=VARCHAR},
+            </if>
+            <if test="tQuestion != null">
+                #{tQuestion,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.IdeaExample" resultType="java.lang.Long">
+        select count(*) from idea
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update idea
+        <set>
+            <if test="record.tId != null">
+                t_id = #{record.tId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tWxid != null">
+                t_wxid = #{record.tWxid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tUsername != null">
+                t_username = #{record.tUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tDepartment != null">
+                t_department = #{record.tDepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tUserid != null">
+                t_userid = #{record.tUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tTelphone != null">
+                t_telphone = #{record.tTelphone,jdbcType=BIGINT},
+            </if>
+            <if test="record.tCreatedate != null">
+                t_createdate = #{record.tCreatedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.tNickname != null">
+                t_nickname = #{record.tNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tSort != null">
+                t_sort = #{record.tSort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tEx1 != null">
+                t_ex1 = #{record.tEx1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tEx2 != null">
+                t_ex2 = #{record.tEx2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tEx3 != null">
+                t_ex3 = #{record.tEx3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tQuestion != null">
+                t_question = #{record.tQuestion,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update idea
+        set t_id = #{record.tId,jdbcType=VARCHAR},
+        t_wxid = #{record.tWxid,jdbcType=VARCHAR},
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+        t_department = #{record.tDepartment,jdbcType=VARCHAR},
+        t_userid = #{record.tUserid,jdbcType=VARCHAR},
+        t_telphone = #{record.tTelphone,jdbcType=BIGINT},
+        t_createdate = #{record.tCreatedate,jdbcType=TIMESTAMP},
+        t_nickname = #{record.tNickname,jdbcType=VARCHAR},
+        t_sort = #{record.tSort,jdbcType=VARCHAR},
+        t_ex1 = #{record.tEx1,jdbcType=VARCHAR},
+        t_ex2 = #{record.tEx2,jdbcType=VARCHAR},
+        t_ex3 = #{record.tEx3,jdbcType=VARCHAR},
+        t_question = #{record.tQuestion,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update idea
+        set t_id = #{record.tId,jdbcType=VARCHAR},
+        t_wxid = #{record.tWxid,jdbcType=VARCHAR},
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+        t_department = #{record.tDepartment,jdbcType=VARCHAR},
+        t_userid = #{record.tUserid,jdbcType=VARCHAR},
+        t_telphone = #{record.tTelphone,jdbcType=BIGINT},
+        t_createdate = #{record.tCreatedate,jdbcType=TIMESTAMP},
+        t_nickname = #{record.tNickname,jdbcType=VARCHAR},
+        t_sort = #{record.tSort,jdbcType=VARCHAR},
+        t_ex1 = #{record.tEx1,jdbcType=VARCHAR},
+        t_ex2 = #{record.tEx2,jdbcType=VARCHAR},
+        t_ex3 = #{record.tEx3,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.Idea">
+        update idea
+        <set>
+            <if test="tWxid != null">
+                t_wxid = #{tWxid,jdbcType=VARCHAR},
+            </if>
+            <if test="tUsername != null">
+                t_username = #{tUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="tDepartment != null">
+                t_department = #{tDepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="tUserid != null">
+                t_userid = #{tUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="tTelphone != null">
+                t_telphone = #{tTelphone,jdbcType=BIGINT},
+            </if>
+            <if test="tCreatedate != null">
+                t_createdate = #{tCreatedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tNickname != null">
+                t_nickname = #{tNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="tSort != null">
+                t_sort = #{tSort,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx1 != null">
+                t_ex1 = #{tEx1,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx2 != null">
+                t_ex2 = #{tEx2,jdbcType=VARCHAR},
+            </if>
+            <if test="tEx3 != null">
+                t_ex3 = #{tEx3,jdbcType=VARCHAR},
+            </if>
+            <if test="tQuestion != null">
+                t_question = #{tQuestion,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where t_id = #{tId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wqy.entity.Idea">
+    update idea
+    set t_wxid = #{tWxid,jdbcType=VARCHAR},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_department = #{tDepartment,jdbcType=VARCHAR},
+      t_userid = #{tUserid,jdbcType=VARCHAR},
+      t_telphone = #{tTelphone,jdbcType=BIGINT},
+      t_createdate = #{tCreatedate,jdbcType=TIMESTAMP},
+      t_nickname = #{tNickname,jdbcType=VARCHAR},
+      t_sort = #{tSort,jdbcType=VARCHAR},
+      t_ex1 = #{tEx1,jdbcType=VARCHAR},
+      t_ex2 = #{tEx2,jdbcType=VARCHAR},
+      t_ex3 = #{tEx3,jdbcType=VARCHAR},
+      t_question = #{tQuestion,jdbcType=LONGVARCHAR}
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.Idea">
+    update idea
+    set t_wxid = #{tWxid,jdbcType=VARCHAR},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_department = #{tDepartment,jdbcType=VARCHAR},
+      t_userid = #{tUserid,jdbcType=VARCHAR},
+      t_telphone = #{tTelphone,jdbcType=BIGINT},
+      t_createdate = #{tCreatedate,jdbcType=TIMESTAMP},
+      t_nickname = #{tNickname,jdbcType=VARCHAR},
+      t_sort = #{tSort,jdbcType=VARCHAR},
+      t_ex1 = #{tEx1,jdbcType=VARCHAR},
+      t_ex2 = #{tEx2,jdbcType=VARCHAR},
+      t_ex3 = #{tEx3,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+
+    <!--信访信息DO数据-->
+    <resultMap id="IdeaDOResultMap" type="com.wqy.pojo.IdeaDO">
+        <id column="t_id" jdbcType="VARCHAR" property="id"/>
+        <result column="t_wxid" jdbcType="VARCHAR" property="wxId"/>
+        <result column="t_username" jdbcType="VARCHAR" property="userName"/>
+        <result column="t_nickname" jdbcType="VARCHAR" property="nickName"/>
+        <result column="t_department" jdbcType="VARCHAR" property="department"/>
+        <result column="t_userid" jdbcType="VARCHAR" property="userId"/>
+        <result column="t_telphone" jdbcType="BIGINT" property="telPhone"/>
+        <result column="t_createdate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="t_question" jdbcType="VARCHAR" property="question"/>
+        <result column="t_sort" jdbcType="VARCHAR" property="sort"/>
+        <result column="t_ex1" jdbcType="VARCHAR" property="ex1"/>
+        <result column="t_ex2" jdbcType="VARCHAR" property="ex2"/>
+        <result column="t_ex3" jdbcType="VARCHAR" property="ex3"/>
+    </resultMap>
+
+    <!--查询信访数据列表-->
+    <select id="listEX" resultMap="IdeaDOResultMap" parameterType="com.wqy.pojo.IdeaDO">
+        select
+        a.t_id,
+        a.t_wxid,
+        a.t_username,
+        a.t_nickname,
+        a.t_department,
+        a.t_userid,
+        a.t_telphone,
+        a.t_question,
+        a.t_createdate,
+        a.t_sort,
+        a.t_ex1,
+        a.t_ex2,
+        a.t_ex3
+        from idea a
+        <where>
+            <if test="sort!=null and sort!=''">
+                a.t_sort = #{sort}
+            </if>
+            <if test="userName!=null and userName != ''">
+                and a.t_username = #{userName}
+            </if>
+            <if test="department!=null and department!=''">
+                and a.t_department = #{department}
+            </if>
+            <if test="createDateStart!=null ">
+                and a.t_createdate <![CDATA[>= ]]> #{createDateStart}
+            </if>
+            <if test="createDateEnd!=null ">
+                 and a.t_createdate <![CDATA[<= ]]> #{createDateEnd}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByNickName" resultMap="IdeaDOResultMap" parameterType="java.lang.String">
+    select
+        a.t_id,
+        a.t_wxid,
+        a.t_username,
+        a.t_nickname,
+        a.t_department,
+        a.t_userid,
+        a.t_telphone,
+        a.t_question,
+        a.t_createdate,
+        a.t_sort,
+        a.t_ex1,
+        a.t_ex2,
+        a.t_ex3
+    from  idea a where a.t_nickname = #{nickName}
+  </select>
+
+</mapper>

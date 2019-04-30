@@ -1,0 +1,6 @@
+.sy_title{
+  text-align: center;
+}
+.sy_content{
+  margin: 0px 20px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/header::header}">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <!--Top顶部 使用nav.Html统一管理-->
+    <div th:replace="~{fragment/nav::nav}"></div>
+
+    <!--Body部分-->
+    <!-- 左侧导航 -->
+    <div class="layui-side layui-bg-black" id="leftNav">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a href="javascript:;" data-url="/admin/user" data-id="1">用户管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 右侧内容 -->
+    <div class="layui-body layui-form" style="overflow: hidden" >
+        <div class="layui-tab " lay-filter="bodyTab" lay-allowClose="true" style="margin: 0 auto">
+            <ul class="layui-tab-title top_tab">
+                <li class="layui-this" lay-id="0"><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
+            </ul>
+            <div class="layui-tab-content clildFrame" style="height: 100%" >
+                <div class="layui-tab-item layui-show" >
+                    <iframe src="/admin/user" style="overflow: scroll;border-color: transparent" width="100%" height="1000px" ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/footer::footer}">...</div>
+<script>
+
+    layui.use(['element','jquery'], function(){
+        var element = layui.element,
+             $ = layui.jquery;
+
+        $("#leftNav a").on("click",function () {
+            var url = $(this).data("url");
+            var title = $(this).text();
+            var id = $(this).data("id");
+            var urlContent = '<iframe th:src="'+url+'" src="'+url+'" style="overflow: scroll;border-color: transparent" width="100%" height="1000px"></iframe>';
+            console.info(id)
+            if(id!=undefined){
+                element.tabDelete('bodyTab', id)
+
+                element.tabAdd('bodyTab', {
+                    title: title
+                    ,content: urlContent //支持传入html
+                    ,id: id
+                });
+
+                element.tabChange('bodyTab', id)
+            }
+
+        })
+
+    });
+</script>
+</body>
+</html>

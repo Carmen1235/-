@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/header::header}">
+</head>
+<link rel="stylesheet" href="/css/index.css" media="all" th:href="@{/css/index.css}"/>
+<body>
+<!--<body class="layui-layout-body"> 使用后五滚动条-->
+<div class="layui-layout layui-layout-admin">
+    <!--Top顶部 使用nav.Html统一管理-->
+    <div th:replace="~{fragment/nav::nav}"></div>
+
+    <!--Body部分-->
+    <div class="layui-layout-body">
+        <blockquote class="layui-elem-quote">欢迎使用万汇 HR报表平台</blockquote>
+        <!--栏目-->
+        <div class="layui-row">
+            <div class="layui-col-md6 panel_box" >
+                <a href="/user/workOverTime">
+                <div class="panel">
+                    <i class="layui-icon layui-icon-read"  style="font-size: 100px"></i>
+                </div>
+                <div class="panel_word">
+                    <span></span>
+                    <cite>加班申请</cite>
+                </div>
+                </a>
+            </div>
+            <div class="layui-col-md6 panel_box" >
+                <a href="/user/workOverTimePlan">
+                    <div class="panel">
+                        <i class="layui-icon layui-icon-theme"  style="font-size: 100px"></i>
+                    </div>
+                    <div class="panel_word">
+                        <span></span>
+                        <cite>加班计划申请</cite>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!--系统栏目-->
+        <div class="layui-row">
+            <!--更新日志-->
+            <div class="layui-col-md6 col">
+                <blockquote class="layui-elem-quote">更新日志</blockquote>
+                <div class="layui-elem-quote layui-quote-nm">
+                    <h3 style="color: #01AAED"># 版本1.0.0</h3>
+                    <p># 新增加班申请报表导出功能</p>
+                    <p># 新增加班计划申请报表导出功能</p>
+                    <h3 style="color: #01AAED"># 版本1.1.0</h3>
+                    <p># 美化登陆页面</p>
+                    <p># 新增验证码.</p>
+                    <h3 style="color: #01AAED"># 版本1.1.1</h3>
+                    <p># 美化登陆页面</p>
+                    <h3 style="color: #01AAED"># 版本1.1.2</h3>
+                    <p class="layui-bg-orange"># 优化加班计划申请页面</p>
+
+                </div>
+            </div>
+            <div class="layui-col-md6 col">
+                <blockquote class="layui-elem-quote">系统参数</blockquote>
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>当前版本</th>
+                        <th>1.1.2</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>开发作者</td>
+                        <td>王秋叶</td>
+                    </tr>
+                    <tr>
+                        <td>网站首页</td>
+                        <td>xx</td>
+                    </tr>
+                    <tr>
+                        <td>服务器环境</td>
+                        <td>CentOS7</td>
+                    </tr>
+                    <tr>
+                        <td>数据库</td>
+                        <td>MySQL</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <blockquote class="layui-elem-quote"><i class="layui-icon layui-icon-fire" ></i><cite>最新消息</cite></blockquote>
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="20">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><i class="layui-icon layui-icon-fire" style="color: #FF5722"></i><cite>更新了2张报表</cite></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/footer::footer}">...</div>
+
+</body>
+</html>

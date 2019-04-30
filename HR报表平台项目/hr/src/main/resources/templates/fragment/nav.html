@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/header::header}"></head>
+<body>
+
+    <!--Top顶部-->
+    <div th:fragment="nav" class="layui-header">
+        <!--Logo-->
+        <div><a href="/index"  class="layui-logo">HR-PlatForm</a></div>
+        <!--Top左侧-->
+        <ul class="layui-nav layui-layout-left layui-hide-xs">
+            <li class="layui-nav-item" >
+                <a href="javascript:;"><i class="layui-icon layui-icon-chart-screen" ><cite style="margin-left: 5px">报表管理</cite></i></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/user/workOverTime" ><i class="layui-icon layui-icon-read"></i> <cite>加班申请</cite></a></dd>
+                    <dd><a href="/user/workOverTimePlan" ><i class="layui-icon layui-icon-theme"></i> <cite>加班计划申请</cite></a></dd>
+                    <dd><a href="javascript:;">...</a></dd>
+                </dl>
+            </li>
+
+            <!--<li class="layui-nav-item"><a href="/admin" target="_parent"><i class="layui-icon layui-icon-console"><cite style="margin-left: 5px">后台管理</cite></i></a></li>-->
+            <!--<li class="layui-nav-item"><a href="/about" target="_parent"><i class="layui-icon layui-icon-about"><cite style="margin-left: 5px">关于</cite></i></a></li>-->
+        </ul>
+        <!--Top右侧-->
+
+    </div>
+
+<div th:replace="~{fragment/footer::footer}">...</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:color="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragment/header::header}">
+</head>
+<body class="layui-layout-body">
+<blockquote class="layui-elem-quote">
+    <span class="layui-breadcrumb">
+     <a href="javascript:;">后台管理</a>
+     <a href="javascript:;">用户管理</a>
+    </span>
+    <span style="float:right;">
+         <a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" id="refresh" >刷新</a>
+    </span>
+</blockquote>
+<!--条件-->
+<div class="layui-row">
+    <form class="layui-form" action="/admin/user/save" method="post" id="userSaveForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" type="text" name="username">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" type="password" name="password">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">权限类型</label>
+                <div class="layui-input-inline">
+                    <select name="roleType" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">管理员</option>
+                        <option value="1" selected>普通用户</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">权限名称</label>
+                <div class="layui-input-inline">
+                    <select name="roleName" lay-verify="required">
+                        <option value=""></option>
+                        <option value="admin">管理权限</option>
+                        <option value="user" selected>使用权限</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <a class="layui-btn layui-btn-danger" id="saveUser">新增</a>
+                    <a class="layui-btn layui-btn-danger" id="queryByUserName">查询</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--数据列表-->
+<div class="layui-row">
+    <table class="layui-table" lay-even lay-data="{height:500, url:'/user/load', page:true, id:'userTable'}"
+    >
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox'}"></th>
+            <th lay-data="{field:'username', width:80, sort: true}">用户名</th>
+            <th lay-data="{field:'password'}">密码</th>
+            <th lay-data="{field:'roleType'}">权限类型</th>
+            <th lay-data="{field:'roleName'}">权限名称</th>
+            <th lay-data="{field:'flag'}">开关</th>
+            <th lay-data="{field:'state'}">状态</th>
+            <!--<th lay-data="{field:'state',width: 200,templet:'#titleTpl' }">操作</th>-->
+        </tr>
+        </thead>
+    </table>
+</div>
+<div th:replace="~{fragment/footer::footer}">...</div>
+
+<script>
+    var table = layui.table,
+        $ = layui.jquery;
+    // 新增用户
+    $('#saveUser').on('click', function () {
+        var username = $('#userSaveForm input[name=username]').val();
+        var password = $('#userSaveForm input[name=password]').val();
+        var roleType = $('#userSaveForm select[name=roleType]').val();
+        var roleName = $('#userSaveForm select[name=roleName]').val();
+        if(username==""){
+            layer.open({
+                title: '提醒',
+                content: '用户名不能为空' //这里content是一个普通的String
+                ,skin: 'layui-layer-molv'
+                ,offset: 't'
+                ,anim: 6
+            });
+            return;
+        }
+        if(password==""){
+            layer.open({
+                title: '提醒',
+                content: '密码不能为空' //这里content是一个普通的String
+                ,skin: 'layui-layer-molv'
+                ,offset: 't'
+                ,anim: 6
+            });
+            return;
+        }
+        if(roleType==""){
+            layer.open({
+                title: '提醒',
+                content: '权限类型未选择' //这里content是一个普通的String
+                ,skin: 'layui-layer-molv'
+                ,offset: 't'
+                ,anim: 6
+            });
+            return;
+        }
+        if(roleName==""){
+            layer.open({
+                title: '提醒',
+                content: '权限名称未选择' //这里content是一个普通的String
+                ,skin: 'layui-layer-molv'
+                ,offset: 't'
+                ,anim: 6
+            });
+            return;
+        }
+        $.ajax({
+            url:'/user/save',
+            type:'post',
+            data:$("#userSaveForm").serializeArray(),
+            dataType:'json',
+            success:function (r) {
+                layer.msg(r.msg);
+                $('#userSaveForm input[name=username]').val("");
+                $('#userSaveForm input[name=password]').val("");
+                table.reload('userTable', {
+                    url: '/user/load'
+                    , where: {
+                    } //设定异步数据接口的额外参数
+                });
+            },
+            error:function (r) {
+                console.info(r);
+                layer.alert(r.responseJSON.message ,{icon: 1});
+            }
+        })
+    })
+    // 查询
+    $('#queryByUserName').on('click', function () {
+        var username = $('#userSaveForm input[name=username]').val();
+        if (username == "") {
+            layer.open({
+                type: 4,
+                content: ['未填写用户名', '#queryByUserName'] //数组第二项即吸附元素选择器或者DOM
+            });
+            return;
+        }
+        table.reload('userTable', {
+            where: {username: username}
+        })
+    })
+    //刷新
+    $('#refresh').on('click', function () {
+        table.reload('userTable', {})
+    })
+
+
+</script>
+<script type="text/html" id="titleTpl">
+    <a href="javascript:;" class="layui-table-link" onclick=" $.get('/user/changeState/{{d.id}}')">{{d.state?'停用':'启用'}}</a>
+    <span style="margin: 0 5px">|</span>
+    <a href="javascript:;" class="layui-table-link" onclick=" $.get('/user/del/{{d.id}}')">删除</a>
+</script>
+
+</body>
+</html>

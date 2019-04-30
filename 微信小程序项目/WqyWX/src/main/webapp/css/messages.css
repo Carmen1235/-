@@ -1,0 +1,14 @@
+.messageLabel{
+    color: #00bbee;
+}
+.messageLabel:after{
+    content: "：";
+    color: #00bbee;
+}
+.messageSearch{
+    margin: 10px 10px;
+}
+.messageSpan{
+    color: #00bbee;
+    margin: 0px 5px;
+}

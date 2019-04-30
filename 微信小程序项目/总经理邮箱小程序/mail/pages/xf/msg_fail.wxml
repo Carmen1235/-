@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">请勿重复提交！</view>
+      <view class="weui-msg__desc">您反馈的问题我们已经收到，我们会尽快处理，感谢您的支持！</view>
+    </view>
+
+    <view class="weui-msg__extra-area">
+      <view class="weui-footer">
+        <view class="weui-footer__links">
+          <navigator url="" class="weui-footer__link">宁波万汇休闲</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © 2018-2019 wangqiuye</view>
+      </view>
+    </view>
+  </view>
+</view>

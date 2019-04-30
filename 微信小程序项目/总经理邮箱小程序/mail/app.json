@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/xf/xf",
+    "pages/xf/msg_success",
+    "pages/xf/msg_fail",
+    "pages/about/about",
+    "pages/sy/sy",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "宁波万汇",
+    "navigationBarTextStyle": "black"
+  }
+}

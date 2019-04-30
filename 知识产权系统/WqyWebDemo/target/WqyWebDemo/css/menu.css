@@ -1,0 +1,18 @@
+.menu_title {
+    background-image: url('../images/background.jpg');
+}
+.menu_title_left{
+    float:left;
+}
+.menu_title_right{
+    float: right;
+}
+
+.menu_logo{
+    margin:5px 0px;
+    height: 45px;
+}
+.menu_logo1{
+    margin:5px 600px 5px 0px;
+    height: 45px;
+}

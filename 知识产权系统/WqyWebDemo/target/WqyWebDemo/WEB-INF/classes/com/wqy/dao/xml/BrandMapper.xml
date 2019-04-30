@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.wqy.entity.Brand">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="brandStyle" jdbcType="VARCHAR" property="brandStyle" />
+    <result column="brandName" jdbcType="VARCHAR" property="brandName" />
+    <result column="fileNumber" jdbcType="VARCHAR" property="fileNumber" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="applyName" jdbcType="VARCHAR" property="applyName" />
+    <result column="protectedAreas" jdbcType="VARCHAR" property="protectedAreas" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="applyNumber" jdbcType="VARCHAR" property="applyNumber" />
+    <result column="applyDate" jdbcType="DATE" property="applyDate" />
+    <result column="regNumber" jdbcType="VARCHAR" property="regNumber" />
+    <result column="regDate" jdbcType="DATE" property="regDate" />
+    <result column="deadline" jdbcType="DATE" property="deadline" />
+    <result column="groups" jdbcType="VARCHAR" property="groups" />
+    <result column="commodity" jdbcType="VARCHAR" property="commodity" />
+    <result column="brandType" jdbcType="VARCHAR" property="brandType" />
+    <result column="authorization" jdbcType="DATE" property="authorization" />
+    <result column="partOwer" jdbcType="VARCHAR" property="partOwer" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="agency" jdbcType="VARCHAR" property="agency" />
+    <result column="firstDate" jdbcType="DATE" property="firstDate" />
+    <result column="brandSource" jdbcType="VARCHAR" property="brandSource" />
+    <result column="projectApplyNumber" jdbcType="VARCHAR" property="projectApplyNumber" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="applyUnit" jdbcType="VARCHAR" property="applyUnit" />
+    <result column="useUnit" jdbcType="VARCHAR" property="useUnit" />
+    <result column="acceptDate" jdbcType="DATE" property="acceptDate" />
+    <result column="noticeDate" jdbcType="DATE" property="noticeDate" />
+    <result column="intRegDate" jdbcType="DATE" property="intRegDate" />
+    <result column="lateDate" jdbcType="DATE" property="lateDate" />
+    <result column="faomousTrademark" jdbcType="VARCHAR" property="faomousTrademark" />
+    <result column="reputedTrademark" jdbcType="VARCHAR" property="reputedTrademark" />
+    <result column="reject" jdbcType="VARCHAR" property="reject" />
+    <result column="cbsdggr" jdbcType="DATE" property="cbsdggr" />
+    <result column="zcggr" jdbcType="DATE" property="zcggr" />
+    <result column="sqxmb" jdbcType="VARCHAR" property="sqxmb" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3" jdbcType="VARCHAR" property="ext3" />
+    <result column="ext4" jdbcType="VARCHAR" property="ext4" />
+    <result column="ext5" jdbcType="VARCHAR" property="ext5" />
+    <result column="ext6" jdbcType="VARCHAR" property="ext6" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, brandStyle, brandName, fileNumber, state, applyName, protectedAreas, category, 
+    applyNumber, applyDate, regNumber, regDate, deadline, groups, commodity, brandType, 
+    authorization, partOwer, color, agency, firstDate, brandSource, projectApplyNumber, 
+    address, applyUnit, useUnit, acceptDate, noticeDate, intRegDate, lateDate, faomousTrademark, 
+    reputedTrademark, reject, cbsdggr, zcggr, sqxmb, bz, ext1, ext2, ext3, ext4, ext5, 
+    ext6
+  </sql>
+  <select id="selectByExample" parameterType="com.wqy.entity.BrandExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brand
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from brand
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wqy.entity.BrandExample">
+    delete from brand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wqy.entity.Brand">
+    insert into brand (id, brandStyle, brandName, 
+      fileNumber, state, applyName, 
+      protectedAreas, category, applyNumber, 
+      applyDate, regNumber, regDate, 
+      deadline, groups, commodity, 
+      brandType, authorization, partOwer, 
+      color, agency, firstDate, 
+      brandSource, projectApplyNumber, address, 
+      applyUnit, useUnit, acceptDate, 
+      noticeDate, intRegDate, lateDate, 
+      faomousTrademark, reputedTrademark, reject, 
+      cbsdggr, zcggr, sqxmb, bz, 
+      ext1, ext2, ext3, ext4, 
+      ext5, ext6)
+    values (#{id,jdbcType=VARCHAR}, #{brandStyle,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{fileNumber,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, 
+      #{protectedAreas,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{applyNumber,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=DATE}, #{regNumber,jdbcType=VARCHAR}, #{regDate,jdbcType=DATE}, 
+      #{deadline,jdbcType=DATE}, #{groups,jdbcType=VARCHAR}, #{commodity,jdbcType=VARCHAR}, 
+      #{brandType,jdbcType=VARCHAR}, #{authorization,jdbcType=DATE}, #{partOwer,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{agency,jdbcType=VARCHAR}, #{firstDate,jdbcType=DATE}, 
+      #{brandSource,jdbcType=VARCHAR}, #{projectApplyNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{applyUnit,jdbcType=VARCHAR}, #{useUnit,jdbcType=VARCHAR}, #{acceptDate,jdbcType=DATE}, 
+      #{noticeDate,jdbcType=DATE}, #{intRegDate,jdbcType=DATE}, #{lateDate,jdbcType=DATE}, 
+      #{faomousTrademark,jdbcType=VARCHAR}, #{reputedTrademark,jdbcType=VARCHAR}, #{reject,jdbcType=VARCHAR}, 
+      #{cbsdggr,jdbcType=DATE}, #{zcggr,jdbcType=DATE}, #{sqxmb,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, 
+      #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqy.entity.Brand">
+    insert into brand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="brandStyle != null">
+        brandStyle,
+      </if>
+      <if test="brandName != null">
+        brandName,
+      </if>
+      <if test="fileNumber != null">
+        fileNumber,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="applyName != null">
+        applyName,
+      </if>
+      <if test="protectedAreas != null">
+        protectedAreas,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="applyNumber != null">
+        applyNumber,
+      </if>
+      <if test="applyDate != null">
+        applyDate,
+      </if>
+      <if test="regNumber != null">
+        regNumber,
+      </if>
+      <if test="regDate != null">
+        regDate,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="groups != null">
+        groups,
+      </if>
+      <if test="commodity != null">
+        commodity,
+      </if>
+      <if test="brandType != null">
+        brandType,
+      </if>
+      <if test="authorization != null">
+        authorization,
+      </if>
+      <if test="partOwer != null">
+        partOwer,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="agency != null">
+        agency,
+      </if>
+      <if test="firstDate != null">
+        firstDate,
+      </if>
+      <if test="brandSource != null">
+        brandSource,
+      </if>
+      <if test="projectApplyNumber != null">
+        projectApplyNumber,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="applyUnit != null">
+        applyUnit,
+      </if>
+      <if test="useUnit != null">
+        useUnit,
+      </if>
+      <if test="acceptDate != null">
+        acceptDate,
+      </if>
+      <if test="noticeDate != null">
+        noticeDate,
+      </if>
+      <if test="intRegDate != null">
+        intRegDate,
+      </if>
+      <if test="lateDate != null">
+        lateDate,
+      </if>
+      <if test="faomousTrademark != null">
+        faomousTrademark,
+      </if>
+      <if test="reputedTrademark != null">
+        reputedTrademark,
+      </if>
+      <if test="reject != null">
+        reject,
+      </if>
+      <if test="cbsdggr != null">
+        cbsdggr,
+      </if>
+      <if test="zcggr != null">
+        zcggr,
+      </if>
+      <if test="sqxmb != null">
+        sqxmb,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+      <if test="ext3 != null">
+        ext3,
+      </if>
+      <if test="ext4 != null">
+        ext4,
+      </if>
+      <if test="ext5 != null">
+        ext5,
+      </if>
+      <if test="ext6 != null">
+        ext6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brandStyle != null">
+        #{brandStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null">
+        #{fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="protectedAreas != null">
+        #{protectedAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null">
+        #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="regNumber != null">
+        #{regNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="groups != null">
+        #{groups,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity != null">
+        #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="brandType != null">
+        #{brandType,jdbcType=VARCHAR},
+      </if>
+      <if test="authorization != null">
+        #{authorization,jdbcType=DATE},
+      </if>
+      <if test="partOwer != null">
+        #{partOwer,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="agency != null">
+        #{agency,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null">
+        #{firstDate,jdbcType=DATE},
+      </if>
+      <if test="brandSource != null">
+        #{brandSource,jdbcType=VARCHAR},
+      </if>
+      <if test="projectApplyNumber != null">
+        #{projectApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUnit != null">
+        #{applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="useUnit != null">
+        #{useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptDate != null">
+        #{acceptDate,jdbcType=DATE},
+      </if>
+      <if test="noticeDate != null">
+        #{noticeDate,jdbcType=DATE},
+      </if>
+      <if test="intRegDate != null">
+        #{intRegDate,jdbcType=DATE},
+      </if>
+      <if test="lateDate != null">
+        #{lateDate,jdbcType=DATE},
+      </if>
+      <if test="faomousTrademark != null">
+        #{faomousTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="reputedTrademark != null">
+        #{reputedTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="reject != null">
+        #{reject,jdbcType=VARCHAR},
+      </if>
+      <if test="cbsdggr != null">
+        #{cbsdggr,jdbcType=DATE},
+      </if>
+      <if test="zcggr != null">
+        #{zcggr,jdbcType=DATE},
+      </if>
+      <if test="sqxmb != null">
+        #{sqxmb,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null">
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null">
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null">
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wqy.entity.BrandExample" resultType="java.lang.Long">
+    select count(*) from brand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brand
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandStyle != null">
+        brandStyle = #{record.brandStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brandName = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileNumber != null">
+        fileNumber = #{record.fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyName != null">
+        applyName = #{record.applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protectedAreas != null">
+        protectedAreas = #{record.protectedAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyNumber != null">
+        applyNumber = #{record.applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null">
+        applyDate = #{record.applyDate,jdbcType=DATE},
+      </if>
+      <if test="record.regNumber != null">
+        regNumber = #{record.regNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regDate != null">
+        regDate = #{record.regDate,jdbcType=DATE},
+      </if>
+      <if test="record.deadline != null">
+        deadline = #{record.deadline,jdbcType=DATE},
+      </if>
+      <if test="record.groups != null">
+        groups = #{record.groups,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodity != null">
+        commodity = #{record.commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandType != null">
+        brandType = #{record.brandType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorization != null">
+        authorization = #{record.authorization,jdbcType=DATE},
+      </if>
+      <if test="record.partOwer != null">
+        partOwer = #{record.partOwer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agency != null">
+        agency = #{record.agency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstDate != null">
+        firstDate = #{record.firstDate,jdbcType=DATE},
+      </if>
+      <if test="record.brandSource != null">
+        brandSource = #{record.brandSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectApplyNumber != null">
+        projectApplyNumber = #{record.projectApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyUnit != null">
+        applyUnit = #{record.applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useUnit != null">
+        useUnit = #{record.useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptDate != null">
+        acceptDate = #{record.acceptDate,jdbcType=DATE},
+      </if>
+      <if test="record.noticeDate != null">
+        noticeDate = #{record.noticeDate,jdbcType=DATE},
+      </if>
+      <if test="record.intRegDate != null">
+        intRegDate = #{record.intRegDate,jdbcType=DATE},
+      </if>
+      <if test="record.lateDate != null">
+        lateDate = #{record.lateDate,jdbcType=DATE},
+      </if>
+      <if test="record.faomousTrademark != null">
+        faomousTrademark = #{record.faomousTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reputedTrademark != null">
+        reputedTrademark = #{record.reputedTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reject != null">
+        reject = #{record.reject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbsdggr != null">
+        cbsdggr = #{record.cbsdggr,jdbcType=DATE},
+      </if>
+      <if test="record.zcggr != null">
+        zcggr = #{record.zcggr,jdbcType=DATE},
+      </if>
+      <if test="record.sqxmb != null">
+        sqxmb = #{record.sqxmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz != null">
+        bz = #{record.bz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null">
+        ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null">
+        ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null">
+        ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext4 != null">
+        ext4 = #{record.ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext5 != null">
+        ext5 = #{record.ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext6 != null">
+        ext6 = #{record.ext6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brand
+    set id = #{record.id,jdbcType=VARCHAR},
+      brandStyle = #{record.brandStyle,jdbcType=VARCHAR},
+      brandName = #{record.brandName,jdbcType=VARCHAR},
+      fileNumber = #{record.fileNumber,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      applyName = #{record.applyName,jdbcType=VARCHAR},
+      protectedAreas = #{record.protectedAreas,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      applyNumber = #{record.applyNumber,jdbcType=VARCHAR},
+      applyDate = #{record.applyDate,jdbcType=DATE},
+      regNumber = #{record.regNumber,jdbcType=VARCHAR},
+      regDate = #{record.regDate,jdbcType=DATE},
+      deadline = #{record.deadline,jdbcType=DATE},
+      groups = #{record.groups,jdbcType=VARCHAR},
+      commodity = #{record.commodity,jdbcType=VARCHAR},
+      brandType = #{record.brandType,jdbcType=VARCHAR},
+      authorization = #{record.authorization,jdbcType=DATE},
+      partOwer = #{record.partOwer,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      agency = #{record.agency,jdbcType=VARCHAR},
+      firstDate = #{record.firstDate,jdbcType=DATE},
+      brandSource = #{record.brandSource,jdbcType=VARCHAR},
+      projectApplyNumber = #{record.projectApplyNumber,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      applyUnit = #{record.applyUnit,jdbcType=VARCHAR},
+      useUnit = #{record.useUnit,jdbcType=VARCHAR},
+      acceptDate = #{record.acceptDate,jdbcType=DATE},
+      noticeDate = #{record.noticeDate,jdbcType=DATE},
+      intRegDate = #{record.intRegDate,jdbcType=DATE},
+      lateDate = #{record.lateDate,jdbcType=DATE},
+      faomousTrademark = #{record.faomousTrademark,jdbcType=VARCHAR},
+      reputedTrademark = #{record.reputedTrademark,jdbcType=VARCHAR},
+      reject = #{record.reject,jdbcType=VARCHAR},
+      cbsdggr = #{record.cbsdggr,jdbcType=DATE},
+      zcggr = #{record.zcggr,jdbcType=DATE},
+      sqxmb = #{record.sqxmb,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      ext1 = #{record.ext1,jdbcType=VARCHAR},
+      ext2 = #{record.ext2,jdbcType=VARCHAR},
+      ext3 = #{record.ext3,jdbcType=VARCHAR},
+      ext4 = #{record.ext4,jdbcType=VARCHAR},
+      ext5 = #{record.ext5,jdbcType=VARCHAR},
+      ext6 = #{record.ext6,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.Brand">
+    update brand
+    <set>
+      <if test="brandStyle != null">
+        brandStyle = #{brandStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        brandName = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null">
+        fileNumber = #{fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        applyName = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="protectedAreas != null">
+        protectedAreas = #{protectedAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null">
+        applyNumber = #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        applyDate = #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="regNumber != null">
+        regNumber = #{regNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        regDate = #{regDate,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="groups != null">
+        groups = #{groups,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity != null">
+        commodity = #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="brandType != null">
+        brandType = #{brandType,jdbcType=VARCHAR},
+      </if>
+      <if test="authorization != null">
+        authorization = #{authorization,jdbcType=DATE},
+      </if>
+      <if test="partOwer != null">
+        partOwer = #{partOwer,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="agency != null">
+        agency = #{agency,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null">
+        firstDate = #{firstDate,jdbcType=DATE},
+      </if>
+      <if test="brandSource != null">
+        brandSource = #{brandSource,jdbcType=VARCHAR},
+      </if>
+      <if test="projectApplyNumber != null">
+        projectApplyNumber = #{projectApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUnit != null">
+        applyUnit = #{applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="useUnit != null">
+        useUnit = #{useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptDate != null">
+        acceptDate = #{acceptDate,jdbcType=DATE},
+      </if>
+      <if test="noticeDate != null">
+        noticeDate = #{noticeDate,jdbcType=DATE},
+      </if>
+      <if test="intRegDate != null">
+        intRegDate = #{intRegDate,jdbcType=DATE},
+      </if>
+      <if test="lateDate != null">
+        lateDate = #{lateDate,jdbcType=DATE},
+      </if>
+      <if test="faomousTrademark != null">
+        faomousTrademark = #{faomousTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="reputedTrademark != null">
+        reputedTrademark = #{reputedTrademark,jdbcType=VARCHAR},
+      </if>
+      <if test="reject != null">
+        reject = #{reject,jdbcType=VARCHAR},
+      </if>
+      <if test="cbsdggr != null">
+        cbsdggr = #{cbsdggr,jdbcType=DATE},
+      </if>
+      <if test="zcggr != null">
+        zcggr = #{zcggr,jdbcType=DATE},
+      </if>
+      <if test="sqxmb != null">
+        sqxmb = #{sqxmb,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null">
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null">
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null">
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqy.entity.Brand">
+    update brand
+    set brandStyle = #{brandStyle,jdbcType=VARCHAR},
+      brandName = #{brandName,jdbcType=VARCHAR},
+      fileNumber = #{fileNumber,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      applyName = #{applyName,jdbcType=VARCHAR},
+      protectedAreas = #{protectedAreas,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      applyNumber = #{applyNumber,jdbcType=VARCHAR},
+      applyDate = #{applyDate,jdbcType=DATE},
+      regNumber = #{regNumber,jdbcType=VARCHAR},
+      regDate = #{regDate,jdbcType=DATE},
+      deadline = #{deadline,jdbcType=DATE},
+      groups = #{groups,jdbcType=VARCHAR},
+      commodity = #{commodity,jdbcType=VARCHAR},
+      brandType = #{brandType,jdbcType=VARCHAR},
+      authorization = #{authorization,jdbcType=DATE},
+      partOwer = #{partOwer,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      agency = #{agency,jdbcType=VARCHAR},
+      firstDate = #{firstDate,jdbcType=DATE},
+      brandSource = #{brandSource,jdbcType=VARCHAR},
+      projectApplyNumber = #{projectApplyNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      applyUnit = #{applyUnit,jdbcType=VARCHAR},
+      useUnit = #{useUnit,jdbcType=VARCHAR},
+      acceptDate = #{acceptDate,jdbcType=DATE},
+      noticeDate = #{noticeDate,jdbcType=DATE},
+      intRegDate = #{intRegDate,jdbcType=DATE},
+      lateDate = #{lateDate,jdbcType=DATE},
+      faomousTrademark = #{faomousTrademark,jdbcType=VARCHAR},
+      reputedTrademark = #{reputedTrademark,jdbcType=VARCHAR},
+      reject = #{reject,jdbcType=VARCHAR},
+      cbsdggr = #{cbsdggr,jdbcType=DATE},
+      zcggr = #{zcggr,jdbcType=DATE},
+      sqxmb = #{sqxmb,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询 未使用-->
+  <select id="listEX" parameterType="com.wqy.model.brand.WebBrandInfo" resultMap="BaseResultMap">
+    select * from brand
+    <where>
+      <if test="brandName!=null and brandName !=''">
+        brand_name like concat('%',concat(#{brandName},'%'))
+      </if>
+      <if test="category!=null and category !=''">
+        and category = #{category}
+      </if>
+      <if test="state!=null and state !=''">
+        and state = #{state}
+      </if>
+      <if test="applyNumber!=null and applyNumber !=''">
+        and apply_number = #{applyNumber}
+      </if>
+      <if test="protectedAreas!=null and protectedAreas !=''">
+        and protected_areas = #{protectedAreas}
+      </if>
+      <if test="agency!=null and agency !=''">
+        and agency = #{agency}
+      </if>
+      <if test="hid_value_address != '' and hid_value_address !=null ">
+        and address in
+        <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+          #{listItem}
+        </foreach>
+      </if>
+    </where>
+    <if test="sortName!=null and sortName != ''">order by ${sort} ${order}</if>
+  </select>
+
+</mapper>

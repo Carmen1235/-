@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqy.dao.mapper.PatentMapper">
+    <resultMap id="BaseResultMap" type="com.wqy.entity.Patent">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="technical_classification" jdbcType="VARCHAR" property="technicalClassification"/>
+        <result column="patentName" jdbcType="VARCHAR" property="patentname"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="patent_product" jdbcType="VARCHAR" property="patentProduct"/>
+        <result column="apply_type" jdbcType="VARCHAR" property="applyType"/>
+        <result column="protected_areas" jdbcType="VARCHAR" property="protectedAreas"/>
+        <result column="patent_type" jdbcType="VARCHAR" property="patentType"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="apply_date" jdbcType="DATE" property="applyDate"/>
+        <result column="apply_name" jdbcType="VARCHAR" property="applyName"/>
+        <result column="apply_number" jdbcType="VARCHAR" property="applyNumber"/>
+        <result column="state" jdbcType="VARCHAR" property="state"/>
+        <result column="accredit_date" jdbcType="DATE" property="accreditDate"/>
+        <result column="patent_number" jdbcType="VARCHAR" property="patentNumber"/>
+        <result column="patent_end_date" jdbcType="DATE" property="patentEndDate"/>
+        <result column="patent_invalid_date" jdbcType="DATE" property="patentInvalidDate"/>
+        <result column="egency" jdbcType="VARCHAR" property="egency"/>
+        <result column="priority_deadline" jdbcType="DATE" property="priorityDeadline"/>
+        <result column="apply_table" jdbcType="VARCHAR" property="applyTable"/>
+        <result column="patent_level" jdbcType="VARCHAR" property="patentLevel"/>
+        <result column="vetting_process" jdbcType="VARCHAR" property="vettingProcess"/>
+        <result column="gkh" jdbcType="VARCHAR" property="gkh"/>
+        <result column="ly" jdbcType="VARCHAR" property="ly"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
+        <result column="ext3" jdbcType="VARCHAR" property="ext3"/>
+        <result column="ext4" jdbcType="VARCHAR" property="ext4"/>
+        <result column="ext5" jdbcType="VARCHAR" property="ext5"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, technical_classification, patentName, image, patent_product, apply_type, protected_areas, 
+    patent_type, address, apply_date, apply_name, apply_number, state, accredit_date, 
+    patent_number, patent_end_date, patent_invalid_date, egency, priority_deadline, apply_table, 
+    patent_level, vetting_process, gkh, ly, bz, ext1, ext2, ext3, ext4, ext5
+  </sql>
+    <select id="selectByExample" parameterType="com.wqy.entity.PatentExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from patent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from patent
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from patent
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.wqy.entity.PatentExample">
+        delete from patent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.wqy.entity.Patent">
+    insert into patent (id, technical_classification, patentName, 
+      image, patent_product, apply_type, 
+      protected_areas, patent_type, address, 
+      apply_date, apply_name, apply_number, 
+      state, accredit_date, patent_number, 
+      patent_end_date, patent_invalid_date, egency, 
+      priority_deadline, apply_table, patent_level, 
+      vetting_process, gkh, ly, 
+      bz, ext1, ext2, ext3, 
+      ext4, ext5)
+    values (#{id,jdbcType=VARCHAR}, #{technicalClassification,jdbcType=VARCHAR}, #{patentname,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{patentProduct,jdbcType=VARCHAR}, #{applyType,jdbcType=VARCHAR}, 
+      #{protectedAreas,jdbcType=VARCHAR}, #{patentType,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=DATE}, #{applyName,jdbcType=VARCHAR}, #{applyNumber,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{accreditDate,jdbcType=DATE}, #{patentNumber,jdbcType=VARCHAR}, 
+      #{patentEndDate,jdbcType=DATE}, #{patentInvalidDate,jdbcType=DATE}, #{egency,jdbcType=VARCHAR}, 
+      #{priorityDeadline,jdbcType=DATE}, #{applyTable,jdbcType=VARCHAR}, #{patentLevel,jdbcType=VARCHAR}, 
+      #{vettingProcess,jdbcType=VARCHAR}, #{gkh,jdbcType=VARCHAR}, #{ly,jdbcType=VARCHAR}, 
+      #{bz,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, 
+      #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wqy.entity.Patent">
+        insert into patent
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="technicalClassification != null">
+                technical_classification,
+            </if>
+            <if test="patentname != null">
+                patentName,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="patentProduct != null">
+                patent_product,
+            </if>
+            <if test="applyType != null">
+                apply_type,
+            </if>
+            <if test="protectedAreas != null">
+                protected_areas,
+            </if>
+            <if test="patentType != null">
+                patent_type,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="applyDate != null">
+                apply_date,
+            </if>
+            <if test="applyName != null">
+                apply_name,
+            </if>
+            <if test="applyNumber != null">
+                apply_number,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="accreditDate != null">
+                accredit_date,
+            </if>
+            <if test="patentNumber != null">
+                patent_number,
+            </if>
+            <if test="patentEndDate != null">
+                patent_end_date,
+            </if>
+            <if test="patentInvalidDate != null">
+                patent_invalid_date,
+            </if>
+            <if test="egency != null">
+                egency,
+            </if>
+            <if test="priorityDeadline != null">
+                priority_deadline,
+            </if>
+            <if test="applyTable != null">
+                apply_table,
+            </if>
+            <if test="patentLevel != null">
+                patent_level,
+            </if>
+            <if test="vettingProcess != null">
+                vetting_process,
+            </if>
+            <if test="gkh != null">
+                gkh,
+            </if>
+            <if test="ly != null">
+                ly,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="ext1 != null">
+                ext1,
+            </if>
+            <if test="ext2 != null">
+                ext2,
+            </if>
+            <if test="ext3 != null">
+                ext3,
+            </if>
+            <if test="ext4 != null">
+                ext4,
+            </if>
+            <if test="ext5 != null">
+                ext5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="technicalClassification != null">
+                #{technicalClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="patentname != null">
+                #{patentname,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="patentProduct != null">
+                #{patentProduct,jdbcType=VARCHAR},
+            </if>
+            <if test="applyType != null">
+                #{applyType,jdbcType=VARCHAR},
+            </if>
+            <if test="protectedAreas != null">
+                #{protectedAreas,jdbcType=VARCHAR},
+            </if>
+            <if test="patentType != null">
+                #{patentType,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate,jdbcType=DATE},
+            </if>
+            <if test="applyName != null">
+                #{applyName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyNumber != null">
+                #{applyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="accreditDate != null">
+                #{accreditDate,jdbcType=DATE},
+            </if>
+            <if test="patentNumber != null">
+                #{patentNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="patentEndDate != null">
+                #{patentEndDate,jdbcType=DATE},
+            </if>
+            <if test="patentInvalidDate != null">
+                #{patentInvalidDate,jdbcType=DATE},
+            </if>
+            <if test="egency != null">
+                #{egency,jdbcType=VARCHAR},
+            </if>
+            <if test="priorityDeadline != null">
+                #{priorityDeadline,jdbcType=DATE},
+            </if>
+            <if test="applyTable != null">
+                #{applyTable,jdbcType=VARCHAR},
+            </if>
+            <if test="patentLevel != null">
+                #{patentLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="vettingProcess != null">
+                #{vettingProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="gkh != null">
+                #{gkh,jdbcType=VARCHAR},
+            </if>
+            <if test="ly != null">
+                #{ly,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="ext3 != null">
+                #{ext3,jdbcType=VARCHAR},
+            </if>
+            <if test="ext4 != null">
+                #{ext4,jdbcType=VARCHAR},
+            </if>
+            <if test="ext5 != null">
+                #{ext5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.wqy.entity.PatentExample" resultType="java.lang.Long">
+        select count(*) from patent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update patent
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.technicalClassification != null">
+                technical_classification = #{record.technicalClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="record.patentname != null">
+                patentName = #{record.patentname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.image != null">
+                image = #{record.image,jdbcType=VARCHAR},
+            </if>
+            <if test="record.patentProduct != null">
+                patent_product = #{record.patentProduct,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyType != null">
+                apply_type = #{record.applyType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.protectedAreas != null">
+                protected_areas = #{record.protectedAreas,jdbcType=VARCHAR},
+            </if>
+            <if test="record.patentType != null">
+                patent_type = #{record.patentType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyDate != null">
+                apply_date = #{record.applyDate,jdbcType=DATE},
+            </if>
+            <if test="record.applyName != null">
+                apply_name = #{record.applyName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyNumber != null">
+                apply_number = #{record.applyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.state != null">
+                state = #{record.state,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accreditDate != null">
+                accredit_date = #{record.accreditDate,jdbcType=DATE},
+            </if>
+            <if test="record.patentNumber != null">
+                patent_number = #{record.patentNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.patentEndDate != null">
+                patent_end_date = #{record.patentEndDate,jdbcType=DATE},
+            </if>
+            <if test="record.patentInvalidDate != null">
+                patent_invalid_date = #{record.patentInvalidDate,jdbcType=DATE},
+            </if>
+            <if test="record.egency != null">
+                egency = #{record.egency,jdbcType=VARCHAR},
+            </if>
+            <if test="record.priorityDeadline != null">
+                priority_deadline = #{record.priorityDeadline,jdbcType=DATE},
+            </if>
+            <if test="record.applyTable != null">
+                apply_table = #{record.applyTable,jdbcType=VARCHAR},
+            </if>
+            <if test="record.patentLevel != null">
+                patent_level = #{record.patentLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vettingProcess != null">
+                vetting_process = #{record.vettingProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gkh != null">
+                gkh = #{record.gkh,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ly != null">
+                ly = #{record.ly,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bz != null">
+                bz = #{record.bz,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext1 != null">
+                ext1 = #{record.ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext2 != null">
+                ext2 = #{record.ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext3 != null">
+                ext3 = #{record.ext3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext4 != null">
+                ext4 = #{record.ext4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext5 != null">
+                ext5 = #{record.ext5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update patent
+        set id = #{record.id,jdbcType=VARCHAR},
+        technical_classification = #{record.technicalClassification,jdbcType=VARCHAR},
+        patentName = #{record.patentname,jdbcType=VARCHAR},
+        image = #{record.image,jdbcType=VARCHAR},
+        patent_product = #{record.patentProduct,jdbcType=VARCHAR},
+        apply_type = #{record.applyType,jdbcType=VARCHAR},
+        protected_areas = #{record.protectedAreas,jdbcType=VARCHAR},
+        patent_type = #{record.patentType,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        apply_date = #{record.applyDate,jdbcType=DATE},
+        apply_name = #{record.applyName,jdbcType=VARCHAR},
+        apply_number = #{record.applyNumber,jdbcType=VARCHAR},
+        state = #{record.state,jdbcType=VARCHAR},
+        accredit_date = #{record.accreditDate,jdbcType=DATE},
+        patent_number = #{record.patentNumber,jdbcType=VARCHAR},
+        patent_end_date = #{record.patentEndDate,jdbcType=DATE},
+        patent_invalid_date = #{record.patentInvalidDate,jdbcType=DATE},
+        egency = #{record.egency,jdbcType=VARCHAR},
+        priority_deadline = #{record.priorityDeadline,jdbcType=DATE},
+        apply_table = #{record.applyTable,jdbcType=VARCHAR},
+        patent_level = #{record.patentLevel,jdbcType=VARCHAR},
+        vetting_process = #{record.vettingProcess,jdbcType=VARCHAR},
+        gkh = #{record.gkh,jdbcType=VARCHAR},
+        ly = #{record.ly,jdbcType=VARCHAR},
+        bz = #{record.bz,jdbcType=VARCHAR},
+        ext1 = #{record.ext1,jdbcType=VARCHAR},
+        ext2 = #{record.ext2,jdbcType=VARCHAR},
+        ext3 = #{record.ext3,jdbcType=VARCHAR},
+        ext4 = #{record.ext4,jdbcType=VARCHAR},
+        ext5 = #{record.ext5,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wqy.entity.Patent">
+        update patent
+        <set>
+            <if test="technicalClassification != null">
+                technical_classification = #{technicalClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="patentname != null">
+                patentName = #{patentname,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="patentProduct != null">
+                patent_product = #{patentProduct,jdbcType=VARCHAR},
+            </if>
+            <if test="applyType != null">
+                apply_type = #{applyType,jdbcType=VARCHAR},
+            </if>
+            <if test="protectedAreas != null">
+                protected_areas = #{protectedAreas,jdbcType=VARCHAR},
+            </if>
+            <if test="patentType != null">
+                patent_type = #{patentType,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="applyDate != null">
+                apply_date = #{applyDate,jdbcType=DATE},
+            </if>
+            <if test="applyName != null">
+                apply_name = #{applyName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyNumber != null">
+                apply_number = #{applyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="accreditDate != null">
+                accredit_date = #{accreditDate,jdbcType=DATE},
+            </if>
+            <if test="patentNumber != null">
+                patent_number = #{patentNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="patentEndDate != null">
+                patent_end_date = #{patentEndDate,jdbcType=DATE},
+            </if>
+            <if test="patentInvalidDate != null">
+                patent_invalid_date = #{patentInvalidDate,jdbcType=DATE},
+            </if>
+            <if test="egency != null">
+                egency = #{egency,jdbcType=VARCHAR},
+            </if>
+            <if test="priorityDeadline != null">
+                priority_deadline = #{priorityDeadline,jdbcType=DATE},
+            </if>
+            <if test="applyTable != null">
+                apply_table = #{applyTable,jdbcType=VARCHAR},
+            </if>
+            <if test="patentLevel != null">
+                patent_level = #{patentLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="vettingProcess != null">
+                vetting_process = #{vettingProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="gkh != null">
+                gkh = #{gkh,jdbcType=VARCHAR},
+            </if>
+            <if test="ly != null">
+                ly = #{ly,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="ext3 != null">
+                ext3 = #{ext3,jdbcType=VARCHAR},
+            </if>
+            <if test="ext4 != null">
+                ext4 = #{ext4,jdbcType=VARCHAR},
+            </if>
+            <if test="ext5 != null">
+                ext5 = #{ext5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wqy.entity.Patent">
+    update patent
+    set technical_classification = #{technicalClassification,jdbcType=VARCHAR},
+      patentName = #{patentname,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      patent_product = #{patentProduct,jdbcType=VARCHAR},
+      apply_type = #{applyType,jdbcType=VARCHAR},
+      protected_areas = #{protectedAreas,jdbcType=VARCHAR},
+      patent_type = #{patentType,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=DATE},
+      apply_name = #{applyName,jdbcType=VARCHAR},
+      apply_number = #{applyNumber,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      accredit_date = #{accreditDate,jdbcType=DATE},
+      patent_number = #{patentNumber,jdbcType=VARCHAR},
+      patent_end_date = #{patentEndDate,jdbcType=DATE},
+      patent_invalid_date = #{patentInvalidDate,jdbcType=DATE},
+      egency = #{egency,jdbcType=VARCHAR},
+      priority_deadline = #{priorityDeadline,jdbcType=DATE},
+      apply_table = #{applyTable,jdbcType=VARCHAR},
+      patent_level = #{patentLevel,jdbcType=VARCHAR},
+      vetting_process = #{vettingProcess,jdbcType=VARCHAR},
+      gkh = #{gkh,jdbcType=VARCHAR},
+      ly = #{ly,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <!--根据条件查询-->
+    <select id="selectByXX" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select * from patent where patentName like concat('%',concat(#{zlSearchPantentName},'%'))
+  </select>
+
+    <!--根据条件查询/显示数据列表-->
+    <select id="listEX" parameterType="com.wqy.model.patent.WebPatentInfo" resultMap="BaseResultMap">
+        select * from patent
+        <where>
+            <if test="patentname!=null and patentname!=''">
+                patentName like concat('%',concat(#{patentname},'%'))
+            </if>
+            <if test="applyNumber!=null and applyNumber!=''">
+                and apply_number =#{applyNumber}
+            </if>
+            <if test="patentNumber!=null and patentNumber!=''">
+                and patent_number=#{patentNumber}
+            </if>
+            <if test="technicalClassification!=null and technicalClassification!=''">
+                and technical_classification = #{technicalClassification}
+            </if>
+            <if test="protectedAreas!=null and protectedAreas!=''">
+                and protected_areas = #{protectedAreas}
+            </if>
+            <if test="state!=null and state!=''">
+                and state=#{state}
+            </if>
+            <if test="applyName!=null and applyName!=''">
+                and apply_name=#{applyName}
+            </if>
+            <if test="applyDateStart!=null and applyDateStart!=''">
+                and apply_date <![CDATA[>= ]]> #{applyDateStart}
+            </if>
+            <if test="applyDateEnd!=null and applyDateEnd!=''">
+                and apply_date <![CDATA[<= ]]> #{applyDateEnd}
+            </if>
+            <if test="accreditDateStart!=null and accreditDateStart!=''">
+                and accredit_date <![CDATA[>= ]]> #{accreditDateStart}
+            </if>
+            <if test="accreditDateEnd!=null and accreditDateEnd!=''">
+                and accredit_date <![CDATA[<= ]]> #{accreditDateEnd}
+            </if>
+            <if test="patentEndDateStart!=null and patentEndDateStart!=''">
+                and patent_end_date <![CDATA[>= ]]> #{patentEndDateStart}
+            </if>
+            <if test="patentEndDateEnd!=null and patentEndDateEnd!=''">
+                and patent_end_date <![CDATA[<= ]]> #{patentEndDateEnd}
+            </if>
+            <if test="hid_value_address != '' and hid_value_address !=null ">
+                and address in
+                <foreach close=")" collection="adds" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+        <if test="sort!=null and sort != ''">order by ${sort} ${order}</if>
+    </select>
+</mapper>
